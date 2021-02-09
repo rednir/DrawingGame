@@ -1,0 +1,51 @@
+extends Node
+
+
+
+signal new_round
+signal new_data
+signal error(message)
+
+
+var dialog
+var dialog_bg = Panel.new()
+var dialog_bg_style = StyleBoxFlat.new()
+
+
+
+func _ready():
+	connect("error", self, "on_error")
+
+
+
+func show_dialog(title, message):
+	dialog = AcceptDialog.new()
+	
+	dialog_bg_style.bg_color = Color(0, 0, 0, 0.5)
+	
+	dialog.window_title = title
+	dialog.dialog_text = message
+	dialog.connect("hide", self, "on_dialog_close")
+	dialog.popup_exclusive = true
+	
+	dialog_bg.add_child(dialog)
+	dialog_bg.rect_position = Vector2(0, 0)
+	dialog_bg.rect_size = Vector2(1024, 600)
+	dialog_bg.set("custom_styles/panel", dialog_bg_style)
+
+	Engine.get_main_loop().current_scene.add_child(dialog_bg)
+	dialog.popup_centered()
+	dialog_bg.show()
+
+
+
+
+func on_error(message):
+	show_dialog("Error", message)
+
+
+
+
+func on_dialog_close():
+	dialog_bg.hide()
+	dialog.queue_free()

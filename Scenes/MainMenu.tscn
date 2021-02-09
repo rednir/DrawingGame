@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Styles/Buttons/generic_button_normal.tres" type="StyleBox" id=1]
+[ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://Styles/Buttons/generic_button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://Styles/LineEdit/generic_lineedit_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="MainMenuControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainButtonsContainer" type="VBoxContainer" parent="."]
+margin_left = 426.0
+margin_top = 342.0
+margin_right = 622.0
+margin_bottom = 494.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinContainer" type="HBoxContainer" parent="MainButtonsContainer"]
+margin_right = 196.0
+margin_bottom = 28.0
+
+[node name="TextboxJoin" type="LineEdit" parent="MainButtonsContainer/JoinContainer"]
+margin_right = 153.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = ExtResource( 4 )
+align = 1
+max_length = 80
+placeholder_text = "Enter IP Address"
+placeholder_alpha = 0.3
+
+[node name="ButtonJoin" type="Button" parent="MainButtonsContainer/JoinContainer"]
+margin_left = 157.0
+margin_right = 196.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+rect_pivot_offset = Vector2( 64.5, 109 )
+hint_tooltip = "
+"
+size_flags_horizontal = 3
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonCreate" type="Button" parent="MainButtonsContainer"]
+margin_top = 32.0
+margin_right = 196.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 28 )
+rect_pivot_offset = Vector2( 64.5, 109 )
+hint_tooltip = "
+"
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "Create Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
