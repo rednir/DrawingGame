@@ -17,19 +17,19 @@ border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=6]
 size = 14
 extra_spacing_top = -3
 extra_spacing_bottom = -3
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=6]
 size = 25
 font_data = ExtResource( 1 )
 
@@ -71,7 +71,7 @@ custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.490196 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -91,7 +91,7 @@ custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.490196 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -122,7 +122,7 @@ custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.490196 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -146,7 +146,7 @@ margin_left = 610.0
 margin_top = 545.0
 margin_right = 929.0
 margin_bottom = 591.0
-custom_fonts/normal_font = SubResource( 6 )
+custom_fonts/normal_font = SubResource( 5 )
 text = "Round -
 Loading"
 fit_content_height = true
@@ -160,7 +160,7 @@ margin_left = 54.0
 margin_top = 66.0
 margin_right = 403.0
 margin_bottom = 115.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 6 )
 text = "Waiting for server to respond...
 "
 scroll_active = false

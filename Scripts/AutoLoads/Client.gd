@@ -5,7 +5,7 @@ var client = null
 
 var list_of_players = []
 var this_player = {
-	name = "rednir",
+	name = "Unspecified",
 	color = null,
 	client_id = null
 }
@@ -16,7 +16,7 @@ var round_data = {
 }
 
 var canvas_data = [[[]]]
-var prompt = "Unset Prompt"
+var prompt = "Server hasn't given a prompt"
 
 
 
@@ -44,12 +44,14 @@ func try_join_server(url):
 
 
 
+
 func on_connected(_proto = ""):
 	print("[Client] Connected")
 	client.get_peer(1).put_var({
 		name = "this_player",
 		data = this_player
 	})
+
 
 
 
@@ -68,8 +70,11 @@ func on_data_recieved():
 		round_data = packet.data
 	elif packet.name == "prompt":
 		prompt = packet.data
+	elif packet.name == "new_game":
+		Events.emit_signal("info", "It's a new game! You are a {pretender and must blend in/artist and must find the pretender}.")
 
 	Events.emit_signal("new_data")
+
 
 
 

@@ -23,6 +23,7 @@ func _ready():
 
 func show_dialog(title, message):
 	dialog = AcceptDialog.new()
+	dialog_bg = Panel.new()
 	
 	dialog_bg_style.bg_color = Color(0, 0, 0, 0.5)
 	

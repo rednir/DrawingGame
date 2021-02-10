@@ -31,16 +31,32 @@ __meta__ = {
 
 [node name="MainButtonsContainer" type="VBoxContainer" parent="."]
 margin_left = 426.0
-margin_top = 342.0
+margin_top = 300.0
 margin_right = 622.0
-margin_bottom = 494.0
+margin_bottom = 452.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinContainer" type="HBoxContainer" parent="MainButtonsContainer"]
+[node name="TextboxUsername" type="LineEdit" parent="MainButtonsContainer"]
 margin_right = 196.0
 margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 2 )
+align = 1
+max_length = 35
+context_menu_enabled = false
+placeholder_text = "Enter Username"
+placeholder_alpha = 0.3
+
+[node name="JoinContainer" type="HBoxContainer" parent="MainButtonsContainer"]
+margin_top = 92.0
+margin_right = 196.0
+margin_bottom = 120.0
 
 [node name="TextboxJoin" type="LineEdit" parent="MainButtonsContainer/JoinContainer"]
 margin_right = 153.0
@@ -52,7 +68,8 @@ custom_styles/focus = SubResource( 1 )
 custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = SubResource( 2 )
 align = 1
-max_length = 80
+max_length = 60
+context_menu_enabled = false
 placeholder_text = "Enter IP Address"
 placeholder_alpha = 0.3
 
@@ -80,9 +97,9 @@ __meta__ = {
 }
 
 [node name="ButtonCreate" type="Button" parent="MainButtonsContainer"]
-margin_top = 32.0
+margin_top = 124.0
 margin_right = 196.0
-margin_bottom = 60.0
+margin_bottom = 152.0
 rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 64.5, 109 )
 hint_tooltip = "

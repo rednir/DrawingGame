@@ -17,6 +17,7 @@ func _ready():
 	if Server.server == null:
 		$DrawingCanvas/ContainerHostButtons.visible = false
 	else:
+		#OS.alert("If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.", "Server")
 		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.")
 
 
@@ -49,13 +50,12 @@ func update_players_list():
 		player_to_add.add_text(player.name)
 		
 		players_list_node.add_child(player_to_add)
+		
 
 
 
 func update_round_info():
 	text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name]
-	print(Client.list_of_players[Client.round_data.current_player_turn])
-	print(Client.this_player)
 	if Client.list_of_players[Client.round_data.current_player_turn].client_id == Client.this_player.client_id:
 		drawing_canvas_node.allowed_to_draw = true
 	else:
