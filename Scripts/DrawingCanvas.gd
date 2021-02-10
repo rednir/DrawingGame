@@ -49,7 +49,7 @@ func add_line():
 			from_pos = turn_canvas_data[len(turn_canvas_data) - 1].to_pos,
 			to_pos = current_mouse_pos,
 			color = Client.this_player.color,
-			width = 5
+			width = 3
 		}
 	else:
 		# Start a new stroke, dont draw a line from the last point
@@ -57,7 +57,7 @@ func add_line():
 			from_pos = current_mouse_pos,
 			to_pos = current_mouse_pos,
 			color = Client.this_player.color,
-			width = 5
+			width = 3
 		}
 	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].append(line_to_add)
 

@@ -16,6 +16,7 @@ var round_data = {
 }
 
 var canvas_data = [[[]]]
+var prompt = "CHAIR"
 
 
 

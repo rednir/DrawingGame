@@ -1,14 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Styles/Buttons/generic_button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://Styles/Buttons/generic_button_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://Styles/LineEdit/generic_lineedit_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
+[sub_resource type="DynamicFont" id=3]
+size = 14
+font_data = ExtResource( 6 )
+
 [sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 6 )
 
 [node name="MainMenuControl" type="Control"]
 anchor_right = 1.0
@@ -39,6 +50,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 custom_styles/focus = SubResource( 1 )
 custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 max_length = 80
 placeholder_text = "Enter IP Address"
@@ -57,6 +69,7 @@ custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -78,6 +91,7 @@ custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )

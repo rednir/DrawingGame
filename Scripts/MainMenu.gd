@@ -24,3 +24,6 @@ func on_button_create_pressed():
 	var status_code = Server.try_create_server()
 	if status_code != OK:
 		Events.emit_signal("error", "Could not create a server (Code: %s)" % status_code)
+	else:
+		Client.try_join_server("localhost")
+		get_tree().change_scene("res://Scenes/Game.tscn")

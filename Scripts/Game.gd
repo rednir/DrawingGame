@@ -5,7 +5,7 @@ extends Control
 onready var drawing_canvas_node = $DrawingCanvas
 onready var players_list_node = $PlayersList
 onready var text_round_info_node = $TextRoundInfo
-
+onready var text_prompt_node = $TextPrompt
 
 
 
@@ -23,6 +23,7 @@ func _process(_delta):
 
 func on_new_data():
 	update_players_list()
+	update_prompt()
 	update_round_info()
 	drawing_canvas_node.update()
 
@@ -47,10 +48,18 @@ func update_players_list():
 
 
 func update_round_info():
-	text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round, Client.list_of_players[Client.round_data.current_player_turn].name]
+	text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name]
 	print(Client.list_of_players[Client.round_data.current_player_turn])
 	print(Client.this_player)
 	if Client.list_of_players[Client.round_data.current_player_turn].client_id == Client.this_player.client_id:
 		drawing_canvas_node.allowed_to_draw = true
 	else:
 		drawing_canvas_node.allowed_to_draw = false
+
+
+
+func update_prompt():
+	text_prompt_node.bbcode_text = "Draw a %s" % Client.prompt
+	print(Server.server)
+	if Server.server != null:
+		text_prompt_node.bbcode_text = "You are the server"
