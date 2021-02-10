@@ -9,11 +9,11 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 14
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 6 )
@@ -50,7 +50,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 custom_styles/focus = SubResource( 1 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 align = 1
 max_length = 80
 placeholder_text = "Enter IP Address"
@@ -67,7 +67,7 @@ hint_tooltip = "
 size_flags_horizontal = 3
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
@@ -89,7 +89,7 @@ hint_tooltip = "
 "
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )

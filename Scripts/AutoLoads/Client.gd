@@ -22,7 +22,7 @@ var prompt = "CHAIR"
 
 func _ready():
 	Events.connect("new_turn", self, "on_new_turn")
-	pass
+	
 
 
 

@@ -9,10 +9,15 @@ onready var text_prompt_node = $TextPrompt
 
 
 
+
 func _ready():
-	#Events.connect("new_round", self, "on_new_round")
 	Events.connect("new_data", self, "on_new_data")
-	#Events.emit_signal("new_round")
+	$DrawingCanvas/ContainerHostButtons/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
+
+	if Server.server == null:
+		$DrawingCanvas/ContainerHostButtons.visible = false
+	else:
+		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.")
 
 
 
@@ -62,4 +67,10 @@ func update_prompt():
 	text_prompt_node.bbcode_text = "Draw a %s" % Client.prompt
 	print(Server.server)
 	if Server.server != null:
-		text_prompt_node.bbcode_text = "You are the server"
+		pass
+		# TODO: Set some visible text telling the user they are server maybe? or maybe not
+
+
+
+func on_button_new_game_pressed():
+	Events.emit_signal("new_game")

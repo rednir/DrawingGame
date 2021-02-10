@@ -4,7 +4,9 @@ extends Node
 
 signal new_turn
 signal new_data
+signal new_game
 signal error(message)
+signal info(message)
 
 
 var dialog
@@ -15,6 +17,7 @@ var dialog_bg_style = StyleBoxFlat.new()
 
 func _ready():
 	connect("error", self, "on_error")
+	connect("info", self, "on_info")
 
 
 
@@ -42,6 +45,11 @@ func show_dialog(title, message):
 
 func on_error(message):
 	show_dialog("Error", message)
+
+
+
+func on_info(message):
+	show_dialog("Info", message)
 
 
 

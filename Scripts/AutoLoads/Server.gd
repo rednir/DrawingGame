@@ -7,6 +7,7 @@ var server = null
 var possible_prompts = [
 	"diary", "bottle", "water", "packet", "chewing gum", "tissue", "glasses", "watch", "sweet", "photo", "camera", "stamp", "postcard", "dictionary", "coin", "brush", "credit card", "identity", "card", "key", "mobile", "phone", "wallet", "button", "umbrella", "pen", "pencil", "lighter", "cigarette", "match", "lipstick", "purse", "case", "clip", "scissors", "rubber", "file", "banknote", "passport", "driving, licence", "comb", "notebook", "laptop", "rubbish", "mirror", "painkiller", "sunscreen", "toothbrush", "headphone", "player", "battery", "light bulb", "bin", "newspaper", "magazine", "alarm clock"
 ]
+var prompt = "Prompt Unset"
 
 var player_colors = [
 	Color.green,
@@ -39,6 +40,8 @@ var canvas_data = [[[]]]
 
 
 func _ready():
+	Events.connect("new_game", self, "on_new_game")
+	emit_signal("new_game")
 	pass
 
 
@@ -99,12 +102,6 @@ func on_data_recieved(id):
 		canvas_data = packet.data
 		#send_data_to_clients("canvas_data", canvas_data) dont think i need this 
 
-	#elif packet.name == "new_round":
-	#	round_data.current_round += 1
-	#	canvas_data.append([])
-	#	send_data_to_clients("round_data", round_data)
-	#	send_data_to_clients("canvas_data", round_data)
-
 	elif packet.name == "new_turn":
 		if len(canvas_data[len(canvas_data) - 1]) >= len(list_of_players):
 			# create new round if amount of turns >= amount of players
@@ -138,10 +135,12 @@ func send_data_to_clients(to_send_name, to_send_data):
 
 
 
+
 func add_new_player(player, id):
 	player.client_id = id
 	player.color = get_next_available_color()
 	list_of_players.append(player)
+
 
 
 
@@ -154,3 +153,18 @@ func get_next_available_color():
 		return null
 	else:
 		return available_colors[0]
+
+
+
+
+func on_new_game():
+	print("emitted new game succesfsaef")
+	canvas_data = [[[]]]
+	round_data = {
+		current_round = 0,
+		current_player_turn = 0
+	}
+	prompt = possible_prompts[randi() % len(possible_prompts - 1)]
+
+	send_data_to_clients("canvas_data", canvas_data)
+	send_data_to_clients("round_data", round_data)
