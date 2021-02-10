@@ -41,7 +41,6 @@ var canvas_data = [[[]]]
 
 func _ready():
 	Events.connect("new_game", self, "on_new_game")
-	emit_signal("new_game")
 	pass
 
 
@@ -82,6 +81,8 @@ func try_create_server():
 	server.connect("client_disconnected", self, "on_disconnected")
 	server.connect("client_close_request", self, "on_close_request")
 	server.connect("data_received", self, "on_data_recieved")
+
+	Events.emit_signal("new_game")
 	
 	return server.listen(PORT)
 
@@ -92,11 +93,12 @@ func on_data_recieved(id):
 	print("[Server] From %d: %s " % [id, packet])
 
 	if packet.name == "this_player":
-		# add new player to the server's list of players, then update the clients with it
+		# add new player to the server's list of players, then update the client with game data
 		add_new_player(packet.data, id)
-		send_data_to_clients("list_of_players", list_of_players)
-		send_data_to_clients("canvas_data", canvas_data)
-		send_data_to_clients("round_data", round_data)
+		send_data_to_clients("list_of_players", list_of_players)	# all clients need to update their list_of_players
+		send_data_to_client_by_id("canvas_data", canvas_data, id)
+		send_data_to_client_by_id("round_data", round_data, id)
+		send_data_to_client_by_id("prompt", prompt, id)
 
 	elif packet.name == "canvas_data":
 		canvas_data = packet.data
@@ -135,6 +137,15 @@ func send_data_to_clients(to_send_name, to_send_data):
 
 
 
+func send_data_to_client_by_id(to_send_name, to_send_data, id):
+	print("Sending data to %s" % id)
+	server.get_peer(id).put_var({
+		name = to_send_name,
+		data = to_send_data
+	})
+
+
+
 
 func add_new_player(player, id):
 	player.client_id = id
@@ -164,7 +175,9 @@ func on_new_game():
 		current_round = 0,
 		current_player_turn = 0
 	}
-	prompt = possible_prompts[randi() % len(possible_prompts - 1)]
+	randomize()
+	prompt = possible_prompts[randi() % len(possible_prompts) - 1]
 
 	send_data_to_clients("canvas_data", canvas_data)
 	send_data_to_clients("round_data", round_data)
+	send_data_to_clients("prompt", prompt)

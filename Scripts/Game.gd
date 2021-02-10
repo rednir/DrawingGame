@@ -64,7 +64,7 @@ func update_round_info():
 
 
 func update_prompt():
-	text_prompt_node.bbcode_text = "Draw a %s" % Client.prompt
+	text_prompt_node.bbcode_text = "Draw %s" % Client.prompt
 	print(Server.server)
 	if Server.server != null:
 		pass

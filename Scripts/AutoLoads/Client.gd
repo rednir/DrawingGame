@@ -16,7 +16,7 @@ var round_data = {
 }
 
 var canvas_data = [[[]]]
-var prompt = "CHAIR"
+var prompt = "Unset Prompt"
 
 
 
@@ -66,6 +66,8 @@ func on_data_recieved():
 		canvas_data = packet.data
 	elif packet.name == "round_data":
 		round_data = packet.data
+	elif packet.name == "prompt":
+		prompt = packet.data
 
 	Events.emit_signal("new_data")
 
