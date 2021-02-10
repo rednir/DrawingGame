@@ -4,10 +4,10 @@ extends Panel
 
 onready var game_node = get_parent()
 
-var canvas_data = []
 var current_mouse_pos
 var is_currently_drawing = false
 var is_mouse_on_canvas = false
+var allowed_to_draw = false
 
 
 
@@ -18,32 +18,37 @@ func _ready():
 	
 	
 func _draw():
-	for game_round in canvas_data:
-		for line in game_round:
-			draw_line(line.from_pos, line.to_pos, line.color, line.width, true)
+	#if len(Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]) == 0:
+	#	return # i honestly dont remember why i had this here
+	for game_round in range(len(Client.canvas_data)):
+		for game_turn in range(len(Client.canvas_data[game_round])):
+			for line in Client.canvas_data[game_round][game_turn]:
+				draw_line(line.from_pos, line.to_pos, line.color, line.width, true)
 	
 	
 	
 func _process(_delta):
 	current_mouse_pos = get_local_mouse_position()
 
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover():
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw:
 		add_line()
 		is_currently_drawing = true
-		update()
 	else:
 		is_currently_drawing = false
+	
+	update()
 	
 
 
 func add_line():
+	var turn_canvas_data = Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]
 	var line_to_add
 	if is_currently_drawing:
 		# Continue the current stroke
 		line_to_add = {
-			from_pos = canvas_data[game_node.current_round - 1][len(canvas_data[game_node.current_round - 1]) - 1].to_pos,
+			from_pos = turn_canvas_data[len(turn_canvas_data) - 1].to_pos,
 			to_pos = current_mouse_pos,
-			color = Color.red,
+			color = Client.this_player.color,
 			width = 5
 		}
 	else:
@@ -51,10 +56,10 @@ func add_line():
 		line_to_add = {
 			from_pos = current_mouse_pos,
 			to_pos = current_mouse_pos,
-			color = Color.red,
+			color = Client.this_player.color,
 			width = 5
 		}
-	canvas_data[game_node.current_round - 1].append(line_to_add)
+	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].append(line_to_add)
 
 
 
@@ -75,12 +80,10 @@ func check_if_mouse_hover():
 
 
 func on_button_clear_pressed():
-	canvas_data[game_node.current_round - 1].clear()
+	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].clear()
 	update()
 
 
 
 func on_button_submit_pressed():
-	Events.emit_signal("new_round")
-	Client.client.get_peer(1).put_var("new round happenedddsfsf")
-	pass
+	Events.emit_signal("new_turn")

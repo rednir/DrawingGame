@@ -19,8 +19,10 @@ border_color = Color( 1, 1, 1, 1 )
 [node name="GameRoot" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.31494
-margin_right = 1.31494
+margin_left = 7.31494
+margin_top = 6.0
+margin_right = 7.31494
+margin_bottom = 6.0
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -91,3 +93,13 @@ margin_bottom = 288.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextRoundInfo" type="RichTextLabel" parent="."]
+margin_left = 610.0
+margin_top = 547.0
+margin_right = 929.0
+margin_bottom = 575.0
+text = "Round -
+Loading"
+fit_content_height = true
+scroll_active = false

@@ -25,6 +25,14 @@ var list_of_players = [
 	},
 ]
 
+var round_data = {
+	current_round = 0,
+	current_player_turn = 0
+}
+
+var canvas_data = [[[]]]
+
+
 
 func _ready():
 	pass
@@ -49,7 +57,7 @@ func on_disconnected(id, was_clean = false):
 	for i in range(len(list_of_players)):
 		if list_of_players[i].client_id == id:
 			list_of_players.remove(i)
-			send_players_list_to_clients()
+			send_data_to_clients("list_of_players", list_of_players)
 			return
 
 
@@ -75,21 +83,53 @@ func on_data_recieved(id):
 	var packet = server.get_peer(id).get_var()
 	print("[Server] From %d: %s " % [id, packet])
 
-	if packet is Dictionary:
-		# client has sent its player info, i want to add this to the server's list of players
-		add_new_player(packet, id)
+	if packet.name == "this_player":
+		# add new player to the server's list of players, then update the clients with it
+		add_new_player(packet.data, id)
+		send_data_to_clients("list_of_players", list_of_players)
+		send_data_to_clients("canvas_data", canvas_data)
+		send_data_to_clients("round_data", round_data)
+
+	elif packet.name == "canvas_data":
+		canvas_data = packet.data
+		#send_data_to_clients("canvas_data", canvas_data) dont think i need this 
+
+	#elif packet.name == "new_round":
+	#	round_data.current_round += 1
+	#	canvas_data.append([])
+	#	send_data_to_clients("round_data", round_data)
+	#	send_data_to_clients("canvas_data", round_data)
+
+	elif packet.name == "new_turn":
+		if len(canvas_data[len(canvas_data) - 1]) >= len(list_of_players):
+			# create new round if amount of turns >= amount of players
+			round_data.current_round += 1
+			round_data.current_player_turn = 0
+			
+			canvas_data.append([])
+			canvas_data[len(canvas_data) - 1].append([])
+		else:
+			round_data.current_player_turn += 1
+			canvas_data[len(canvas_data) - 1].append([])
+		
+		#print(canvas_data)
+		send_data_to_clients("round_data", round_data)
+		send_data_to_clients("canvas_data", canvas_data)
 	
-	# update clients with new list_of_players
-	send_players_list_to_clients()
+	# # update clients with new list_of_players
+	
 
 
 
-func send_players_list_to_clients():
+func send_data_to_clients(to_send_name, to_send_data):
 	for player in list_of_players:
 		if player.client_id == null:
 			continue
-		print("Sending players list to %s" % player.client_id)
-		server.get_peer(player.client_id).put_var(list_of_players)
+		print("Sending data to %s" % player.client_id)
+		server.get_peer(player.client_id).put_var({
+			name = to_send_name,
+			data = to_send_data
+		})
 
 
 
@@ -97,7 +137,6 @@ func add_new_player(player, id):
 	player.client_id = id
 	player.color = get_next_available_color()
 	list_of_players.append(player)
-	print(list_of_players)
 
 
 

@@ -2,7 +2,7 @@ extends Node
 
 
 
-signal new_round
+signal new_turn
 signal new_data
 signal error(message)
 
