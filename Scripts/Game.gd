@@ -47,7 +47,10 @@ func update_players_list():
 		
 		player_to_add.fit_content_height = true
 		player_to_add.push_color(player.color)
-		player_to_add.add_text(player.name)
+		if player == Client.this_player:
+			player_to_add.add_text(player.name + " (you)")
+		else:
+			player_to_add.add_text(player.name)
 		
 		players_list_node.add_child(player_to_add)
 		
