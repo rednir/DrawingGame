@@ -11,10 +11,15 @@ var prompt = "Prompt Unset (Server)"
 
 var player_colors = [
 	Color.green,
-	Color.blue,
+	Color.cyan,
 	Color.red,
 	Color.yellow,
-	Color.pink
+	Color.pink,
+	Color.indigo,
+	Color.violet,
+	Color.yellowgreen,
+	Color.salmon,
+	Color.purple
 ]
 
 var list_of_players = [
