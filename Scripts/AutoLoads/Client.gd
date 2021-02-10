@@ -6,8 +6,8 @@ var client = null
 
 var this_player = {
 	name = "rednir",
-	color = Color.red,
-	client_id = -1
+	color = null,
+	client_id = null
 }
 var list_of_players = []
 
@@ -17,7 +17,7 @@ func _ready():
 
 
 
-func _process(delta):
+func _process(_delta):
 	if client != null:
 		client.poll()
 
@@ -35,7 +35,7 @@ func try_join_server(url):
 
 
 
-func on_connected(proto = ""):
+func on_connected(_proto = ""):
 	print("[Client] Connected")
 	client.get_peer(1).put_var(this_player)
 
