@@ -79,6 +79,8 @@ func on_close_request(id, _code, reason):
 
 func try_create_server():
 	server = WebSocketServer.new()
+	server.set_buffers(1000000, 1000000, 1000000, 1000000)	# quick fix for issues with canvas_data sending too much data and client closing as a result
+	server.encode_buffer_max_size = 1000000					#	
 	
 	server.connect("client_connected", self, "on_connected")
 	server.connect("client_disconnected", self, "on_disconnected")
@@ -164,11 +166,9 @@ func add_new_player(player, id):
 func get_next_available_color():
 	var available_colors = player_colors
 	for player in list_of_players:
-		print("\n")
-		print(player)
-		print(available_colors)
-		print("\n")
-		available_colors.remove(available_colors.find(player.color))
+		var unavailable_color = available_colors.find(player.color)
+		if unavailable_color != -1:
+			available_colors.remove(available_colors.find(player.color))
 
 	if len(available_colors) == 0:
 		return null

@@ -36,6 +36,8 @@ func _process(_delta):
 
 func try_join_server(url):
 	client = WebSocketClient.new()
+	client.set_buffers(1000000, 1000000, 1000000, 1000000)	# quick fix for issues with canvas_data sending too much data and client closing as a result
+	client.encode_buffer_max_size = 1000000					#
 	
 	client.connect("connection_established", self, "on_connected")
 	client.connect("connection_closed", self, "on_closed")

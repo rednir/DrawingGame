@@ -28,6 +28,7 @@ func on_button_join_pressed():
 
 
 
+		
 func on_button_create_pressed():
 	var status_code = Server.try_create_server()
 	if len(textbox_username.text) < min_name_length:
