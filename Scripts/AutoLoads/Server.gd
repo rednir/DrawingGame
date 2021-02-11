@@ -70,8 +70,8 @@ func on_disconnected(id, was_clean = false):
 
 
 
-func on_close_request():
-	print("[Server] Close request")
+func on_close_request(id, code, reason):
+	print("[Server] Client %s sent close request with reason: %s" % [id, reason])
 
 
 

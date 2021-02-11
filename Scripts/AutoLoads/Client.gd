@@ -64,8 +64,14 @@ func on_data_recieved():
 	if packet.name == "list_of_players":
 		list_of_players = packet.data
 		if this_player.client_id == null:
-			# this happens when client first connects
+			# when player first connects, its easy to find the updated this_player
 			this_player = list_of_players[len(list_of_players) - 1]
+		else:
+			# otherwise we still need to find the updated version of this_player
+			for player in list_of_players:
+				if player.client_id == this_player.client_id:
+					this_player = player
+					break
 	elif packet.name == "canvas_data":
 		canvas_data = packet.data
 	elif packet.name == "round_data":
