@@ -36,6 +36,7 @@ func on_button_create_pressed():
 
 	if status_code != OK:
 		Events.emit_signal("error", "Could not create a server (Code: %s)" % status_code)
+		Server.server = null
 	else:
 		Client.this_player.name = textbox_username.text
 		Client.try_join_server("localhost")
