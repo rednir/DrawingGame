@@ -13,6 +13,7 @@ onready var text_prompt_node = $TextPrompt
 func _ready():
 	Events.connect("new_data", self, "on_new_data")
 	$DrawingCanvas/ContainerHostButtons/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
+	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
 	if Server.server == null:
 		$DrawingCanvas/ContainerHostButtons.visible = false
@@ -47,7 +48,7 @@ func update_players_list():
 		
 		player_to_add.fit_content_height = true
 		player_to_add.push_color(player.color)
-		if player == Client.this_player:
+		if player.client_id == Client.this_player.client_id:
 			player_to_add.add_text(player.name + " (you)")
 		else:
 			player_to_add.add_text(player.name)
@@ -61,8 +62,10 @@ func update_round_info():
 	text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name]
 	if Client.list_of_players[Client.round_data.current_player_turn].client_id == Client.this_player.client_id:
 		drawing_canvas_node.allowed_to_draw = true
+		$DrawingCanvas/ContainerButtons.visible = true
 	else:
 		drawing_canvas_node.allowed_to_draw = false
+		$DrawingCanvas/ContainerButtons.visible = false
 
 
 
@@ -77,3 +80,13 @@ func update_prompt():
 
 func on_button_new_game_pressed():
 	Events.emit_signal("new_game")
+
+
+
+
+func on_button_leave_pressed():
+	Server.server = null
+	Client.client = null
+	Server.list_of_players = []
+	Client.list_of_players = []
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")

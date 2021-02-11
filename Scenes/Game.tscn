@@ -167,3 +167,24 @@ scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ButtonLeave" type="Button" parent="."]
+margin_left = 51.0
+margin_top = 515.0
+margin_right = 110.0
+margin_bottom = 539.0
+rect_min_size = Vector2( 0, 24 )
+rect_pivot_offset = Vector2( 78.785, 36 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0.490196 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}

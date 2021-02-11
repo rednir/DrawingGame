@@ -7,7 +7,8 @@ var list_of_players = []
 var this_player = {
 	name = "Unspecified",
 	color = null,
-	client_id = null
+	client_id = null,
+	is_pretending = false
 }
 
 var round_data = {

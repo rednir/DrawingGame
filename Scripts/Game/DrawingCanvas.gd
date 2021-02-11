@@ -3,6 +3,9 @@ extends Panel
 
 
 onready var game_node = get_parent()
+onready var button_clear_node = $ContainerButtons/ButtonClear
+onready var button_submit_node = $ContainerButtons/ButtonSubmit
+
 
 var current_mouse_pos
 var is_currently_drawing = false
@@ -12,8 +15,8 @@ var allowed_to_draw = false
 
 
 func _ready():
-	$ContainerButtons/ButtonClear.connect("pressed", self, "on_button_clear_pressed")
-	$ContainerButtons/ButtonSubmit.connect("pressed", self, "on_button_submit_pressed")
+	button_clear_node.connect("pressed", self, "on_button_clear_pressed")
+	button_submit_node.connect("pressed", self, "on_button_submit_pressed")
 	
 	
 	
