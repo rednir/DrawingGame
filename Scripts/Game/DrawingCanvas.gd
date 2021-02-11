@@ -33,7 +33,7 @@ func _draw():
 func _process(_delta):
 	current_mouse_pos = get_local_mouse_position()
 
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw:
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw and !Client.round_data.game_over:
 		add_line()
 		is_currently_drawing = true
 	else:

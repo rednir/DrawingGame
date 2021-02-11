@@ -2,12 +2,13 @@ extends Node
 
 
 const PORT = 9080
+const MIN_PLAYERS = 3
 var server = null
 
 var possible_prompts = [
 	"diary", "bottle", "water", "packet", "chewing gum", "tissue", "glasses", "watch", "sweet", "photo", "camera", "stamp", "postcard", "dictionary", "coin", "brush", "credit card", "identity", "card", "key", "mobile", "phone", "wallet", "button", "umbrella", "pen", "pencil", "lighter", "cigarette", "match", "lipstick", "purse", "case", "clip", "scissors", "rubber", "file", "banknote", "passport", "driving, licence", "comb", "notebook", "laptop", "rubbish", "mirror", "painkiller", "sunscreen", "toothbrush", "headphone", "player", "battery", "light bulb", "bin", "newspaper", "magazine", "alarm clock"
 ]
-var prompt = "Prompt Unset (Server)"
+var prompt = "[Game not started]"
 
 var player_colors = [
 	Color.green,
@@ -31,6 +32,7 @@ var list_of_players = [
 ]
 
 var round_data = {
+	game_over = true,
 	current_round = 0,
 	current_player_turn = 0
 }
@@ -82,7 +84,7 @@ func try_create_server():
 	server.connect("client_close_request", self, "on_close_request")
 	server.connect("data_received", self, "on_data_recieved")
 
-	Events.emit_signal("new_game")
+	#Events.emit_signal("new_game")
 	
 	return server.listen(PORT)
 
@@ -169,16 +171,24 @@ func get_next_available_color():
 
 
 func on_new_game():
-	print("emitted new game succesfsaef")
+	if len(list_of_players) < MIN_PLAYERS:
+		Events.emit_signal("error", "In order to create a new round, you must have at least %s players connected." % MIN_PLAYERS)
+		return
+
 	canvas_data = [[[]]]
 	round_data = {
 		current_round = 0,
 		current_player_turn = 0
 	}
+
+	for player in list_of_players:
+		player.is_pretending = false
 	randomize()
+	list_of_players[randi() % len(list_of_players) - 1].is_pretending = true
 	prompt = possible_prompts[randi() % len(possible_prompts) - 1]
 
 	send_data_to_clients("canvas_data", canvas_data)
 	send_data_to_clients("round_data", round_data)
+	send_data_to_clients("list_of_players", list_of_players)
 	send_data_to_clients("prompt", prompt)
 	send_data_to_clients("new_game", null)

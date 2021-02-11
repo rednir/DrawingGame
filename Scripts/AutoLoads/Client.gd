@@ -12,6 +12,7 @@ var this_player = {
 }
 
 var round_data = {
+	game_over = true,
 	current_round = 0,
 	current_player_turn = 0
 }
