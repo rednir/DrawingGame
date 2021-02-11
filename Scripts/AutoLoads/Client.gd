@@ -12,7 +12,7 @@ var this_player = {
 }
 
 var round_data = {
-	game_over = true,
+	is_game_over = true,
 	current_round = 0,
 	current_player_turn = 0
 }
@@ -73,7 +73,7 @@ func on_data_recieved():
 	elif packet.name == "prompt":
 		prompt = packet.data
 	elif packet.name == "new_game":
-		Events.emit_signal("info", "It's a new game!\nYou are %s." % "pretending, and must blend in." if this_player.is_pretending else "drawing, and must find the pretender")
+		Events.emit_signal("info", "It's a new game!\nYou are %s." % ("pretending, and must blend in." if this_player.is_pretending else "drawing, and must find the pretender"))
 
 	Events.emit_signal("new_data")
 

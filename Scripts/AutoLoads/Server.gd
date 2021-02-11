@@ -32,7 +32,7 @@ var list_of_players = [
 ]
 
 var round_data = {
-	game_over = true,
+	is_game_over = true,
 	current_round = 0,
 	current_player_turn = 0
 }
@@ -177,6 +177,7 @@ func on_new_game():
 
 	canvas_data = [[[]]]
 	round_data = {
+		is_game_over = false,
 		current_round = 0,
 		current_player_turn = 0
 	}
@@ -184,7 +185,7 @@ func on_new_game():
 	for player in list_of_players:
 		player.is_pretending = false
 	randomize()
-	list_of_players[randi() % len(list_of_players) - 1].is_pretending = true
+	list_of_players[randi() % len(list_of_players)].is_pretending = true
 	prompt = possible_prompts[randi() % len(possible_prompts) - 1]
 
 	send_data_to_clients("canvas_data", canvas_data)
