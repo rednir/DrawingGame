@@ -57,8 +57,8 @@ func on_connected(_proto = ""):
 
 
 
-func on_connection_error():
-	print("[Client] Error")
+func on_closed(was_clean = false):
+	print("[Client] Closed, was_clean=" + str(was_clean))
 
 
 

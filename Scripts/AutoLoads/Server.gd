@@ -164,6 +164,10 @@ func add_new_player(player, id):
 func get_next_available_color():
 	var available_colors = player_colors
 	for player in list_of_players:
+		print("\n")
+		print(player)
+		print(available_colors)
+		print("\n")
 		available_colors.remove(available_colors.find(player.color))
 
 	if len(available_colors) == 0:
