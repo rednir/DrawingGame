@@ -32,7 +32,7 @@ var list_of_players = [
 ]
 
 var round_data = {
-	is_game_over = true,
+	gamestate = 0,		# 0 is game over, 1 is game running, 2 is voting time
 	current_round = 0,
 	current_player_turn = 0
 }
@@ -177,7 +177,7 @@ func on_new_game():
 
 	canvas_data = [[[]]]
 	round_data = {
-		is_game_over = false,
+		gamestate = 1,
 		current_round = 0,
 		current_player_turn = 0
 	}

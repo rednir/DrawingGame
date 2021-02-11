@@ -60,7 +60,7 @@ func update_players_list():
 
 func update_round_info():
 	text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name]
-	if Client.list_of_players[Client.round_data.current_player_turn].client_id == Client.this_player.client_id and !Client.round_data.is_game_over:
+	if Client.list_of_players[Client.round_data.current_player_turn].client_id == Client.this_player.client_id and Client.round_data.gamestate == 1:
 		drawing_canvas_node.allowed_to_draw = true
 		$DrawingCanvas/ContainerButtons.visible = true
 	else:
