@@ -22,6 +22,8 @@ func _ready():
 
 
 func show_dialog(title, message):
+	OS.alert(message, title)
+	return # i need to fix the below crashing on exported version
 	on_dialog_close()
 
 	dialog = AcceptDialog.new()
