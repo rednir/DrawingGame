@@ -4,8 +4,9 @@
 [ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://Styles/Buttons/generic_button_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://Styles/LineEdit/generic_lineedit_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/MainMenu/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=6]
+
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
