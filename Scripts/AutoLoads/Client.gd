@@ -73,7 +73,7 @@ func on_data_recieved():
 	elif packet.name == "prompt":
 		prompt = packet.data
 	elif packet.name == "new_game":
-		Events.emit_signal("info", "It's a new game! You are a {pretender and must blend in/artist and must find the pretender}.")
+		Events.emit_signal("info", "It's a new game!\nYou are %s." % "pretending, and must blend in." if this_player.is_pretending else "drawing, and must find the pretender")
 
 	Events.emit_signal("new_data")
 

@@ -70,11 +70,10 @@ func update_round_info():
 
 
 func update_prompt():
-	text_prompt_node.bbcode_text = "Draw %s" % Client.prompt
-	print(Server.server)
-	if Server.server != null:
-		pass
-		# TODO: Set some visible text telling the user they are server maybe? or maybe not
+	if Client.this_player.is_pretending:
+		text_prompt_node.bbcode_text = "Figure out the prompt!"
+	else:
+		text_prompt_node.bbcode_text = "Draw %s" % Client.prompt
 
 
 
