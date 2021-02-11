@@ -70,6 +70,8 @@ func on_data_recieved():
 			# otherwise we still need to find the updated version of this_player
 			for player in list_of_players:
 				if player.client_id == this_player.client_id:
+					print("assigning new this_player")
+					print(this_player)
 					this_player = player
 					break
 	elif packet.name == "canvas_data":

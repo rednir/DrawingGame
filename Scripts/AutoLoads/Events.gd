@@ -10,7 +10,7 @@ signal info(message)
 
 
 var dialog
-var dialog_bg = Panel.new()
+var dialog_bg
 var dialog_bg_style = StyleBoxFlat.new()
 
 
@@ -22,6 +22,8 @@ func _ready():
 
 
 func show_dialog(title, message):
+	on_dialog_close()
+
 	dialog = AcceptDialog.new()
 	dialog_bg = Panel.new()
 	
@@ -56,5 +58,7 @@ func on_info(message):
 
 
 func on_dialog_close():
-	dialog_bg.hide()
-	dialog.queue_free()
+	if dialog_bg != null:
+		dialog_bg.queue_free()
+	if dialog != null:
+		dialog.queue_free()
