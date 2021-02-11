@@ -2,7 +2,7 @@ extends Node
 
 
 const PORT = 9080
-const MIN_PLAYERS = 3
+const MIN_PLAYERS = 0 # temp
 const VOTING_ROUND = 3
 var server = null
 
@@ -35,7 +35,8 @@ var list_of_players = [
 var round_data = {
 	gamestate = 0,		# 0 is game over, 1 is game running, 2 is voting time
 	current_round = 0,
-	current_player_turn = 0
+	current_player_turn = 0,
+	pretender = null
 }
 
 var canvas_data = [[[]]]
@@ -86,8 +87,6 @@ func try_create_server():
 	server.connect("client_disconnected", self, "on_disconnected")
 	server.connect("client_close_request", self, "on_close_request")
 	server.connect("data_received", self, "on_data_recieved")
-
-	#Events.emit_signal("new_game")
 	
 	return server.listen(PORT)
 
@@ -95,7 +94,7 @@ func try_create_server():
 
 func on_data_recieved(id):
 	var packet = server.get_peer(id).get_var()
-	print("[Server] From %d: %s " % [id, packet])
+	print("[Server] Data recieved from %d: %s " % [id, packet])
 
 	if packet.name == "this_player":
 		# add new player to the server's list of players, then update the client with game data
@@ -108,6 +107,12 @@ func on_data_recieved(id):
 	elif packet.name == "canvas_data":
 		canvas_data = packet.data
 		#send_data_to_clients("canvas_data", canvas_data) dont think i need this 
+	
+	elif packet.name == "list_of_players":		# as of writing this, only used when adding votes
+		list_of_players = packet.data
+		send_data_to_clients("list_of_players", list_of_players)
+		if check_if_everyone_has_voted():
+			send_data_to_clients("everyone_has_voted", null)
 
 	elif packet.name == "new_turn":
 		if len(canvas_data[len(canvas_data) - 1]) >= len(list_of_players):
@@ -130,6 +135,14 @@ func on_data_recieved(id):
 	
 	# # update clients with new list_of_players
 	
+
+
+
+func check_if_everyone_has_voted():
+	for player in list_of_players:
+		if player.has_voted == false:
+			return false
+	return true
 
 
 
@@ -192,8 +205,13 @@ func on_new_game():
 
 	for player in list_of_players:
 		player.is_pretending = false
+		player.amount_of_votes = 0
+		player.has_voted = false
+
 	randomize()
-	list_of_players[randi() % len(list_of_players)].is_pretending = true
+	var pretender_index = randi() % len(list_of_players)
+	round_data.pretender = list_of_players[pretender_index]
+	list_of_players[pretender_index].is_pretending = true
 	prompt = possible_prompts[randi() % len(possible_prompts) - 1]
 
 	send_data_to_clients("canvas_data", canvas_data)

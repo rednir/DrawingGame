@@ -8,13 +8,16 @@ var this_player = {
 	name = "Unspecified",
 	color = null,
 	client_id = null,
-	is_pretending = false
+	is_pretending = false,
+	amount_of_votes = 0,
+	has_voted = false
 }
 
 var round_data = {
 	gamestate = 0,
 	current_round = 0,
-	current_player_turn = 0
+	current_player_turn = 0,
+	pretender = null
 }
 
 var canvas_data = [[[]]]
@@ -90,6 +93,10 @@ func on_data_recieved():
 		prompt = packet.data
 	elif packet.name == "new_game":
 		Events.emit_signal("info", "It's a new game!\nYou are %s." % ("pretending, and must blend in." if this_player.is_pretending else "drawing, and must find the pretender"))
+	elif packet.name == "everyone_has_voted":
+		Events.emit_signal("info", "Game over!\nThe pretender was %s!" % round_data.pretender.name)
+		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait until dialog box has been closed
+		round_data.gamestate = 0
 
 	Events.emit_signal("new_data")
 

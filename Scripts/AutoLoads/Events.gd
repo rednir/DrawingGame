@@ -22,8 +22,20 @@ func _ready():
 
 
 func show_dialog(title, message):
-	OS.alert(message, title)
-	return # i need to fix the below crashing on exported version
+	#OS.alert(message, title)
+	dialog = AcceptDialog.new()
+	dialog.name = "AcceptDialog"
+
+	dialog.window_title = title
+	dialog.dialog_text = message
+	dialog.connect("hide", self, "on_dialog_close")
+	dialog.popup_exclusive = true
+
+	Engine.get_main_loop().current_scene.add_child(dialog)
+	dialog.popup_centered()
+
+	return # i need to fix the below crashing on exported version, something to do with the bg i think
+
 	on_dialog_close()
 
 	dialog = AcceptDialog.new()

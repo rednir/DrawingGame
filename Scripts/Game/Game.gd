@@ -44,13 +44,19 @@ func update_players_list():
 	
 	# if voting time, then add buttons instead
 	if Client.round_data.gamestate == 2:
+		var i = 0
 		for player in Client.list_of_players: 
 			var vote_button = Button.new()
 			vote_button.rect_size = Vector2(80, 50)
-			vote_button.text = player.name
+			vote_button.text = player.name + (" (%s votes)" % Client.list_of_players[i].amount_of_votes)
+			if Client.this_player.has_voted:
+				vote_button.disabled = true
 
 			players_list_node.add_child(vote_button)
+			vote_button.connect("pressed", self, "on_button_vote_pressed", [i])
 			vote_button.show()
+			
+			i += 1
 		return
 	
 	# Add a new RichTextLabel for each player in list_of_players
@@ -92,10 +98,13 @@ func update_round_info():
 
 
 func update_prompt():
-	if Client.this_player.is_pretending:
-		text_prompt_node.bbcode_text = "Figure out the prompt!"
+	if Client.round_data.gamestate == 0:
+		text_prompt_node.bbcode_text = "[Game not started]"
 	else:
-		text_prompt_node.bbcode_text = "Draw %s" % Client.prompt
+		if Client.this_player.is_pretending:
+			text_prompt_node.bbcode_text = "Figure out the prompt!"
+		else:
+			text_prompt_node.bbcode_text = "Draw %s" % Client.prompt
 
 
 
@@ -105,9 +114,40 @@ func on_button_new_game_pressed():
 
 
 
-func on_button_leave_pressed():
+func on_button_leave_pressed():		# maybe make the client and server resets a signal
 	Server.server = null
-	Client.client = null
 	Server.list_of_players = []
+	Server.prompt = "[Game not started]"
+	Server.canvas_data = [[[]]]
+	Server.round_data = {
+		gamestate = 0,
+		current_round = 0,
+		current_player_turn = 0,
+		pretender = null
+	}
+
+	Client.client = null
 	Client.list_of_players = []
+	Client.prompt = "Server hasn't given a prompt"
+	Server.canvas_data = [[[]]]
+	Server.round_data = {
+		gamestate = 0,
+		current_round = 0,
+		current_player_turn = 0,
+		pretender = null
+	}
+	
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+
+
+
+func on_button_vote_pressed(player_index):
+	#for child in players_list_node.get_children():
+		#child.disabled = true
+	Client.this_player.has_voted = true
+	
+	Client.list_of_players[player_index].amount_of_votes += 1
+	Client.client.get_peer(1).put_var({
+		name = "list_of_players",
+		data = Client.list_of_players
+	})
