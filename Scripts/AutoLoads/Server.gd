@@ -23,16 +23,11 @@ var player_colors = [
 ]
 
 var list_of_players = [
-	{
-		client_id = null,
-		name = "other",
-		color = Color.green
-	},
-	{
-		client_id = null,
-		name = "yeah",
-		color = Color.blue
-	},
+	#{
+	#	client_id = null,
+	#	name = "other",
+	#	color = Color.green
+	#},
 ]
 
 var round_data = {
