@@ -57,6 +57,12 @@ func on_connected(_proto = ""):
 
 
 
+func on_connection_error():
+	print("[Client] Error")
+
+
+
+
 func on_data_recieved():
 	var packet = client.get_peer(1).get_var()
 	print("[Client] Data recieved:" + str(packet))
