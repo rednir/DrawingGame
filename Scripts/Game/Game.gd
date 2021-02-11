@@ -59,13 +59,19 @@ func update_players_list():
 
 
 func update_round_info():
-	text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name]
 	if Client.list_of_players[Client.round_data.current_player_turn].client_id == Client.this_player.client_id and Client.round_data.gamestate == 1:
 		drawing_canvas_node.allowed_to_draw = true
 		$DrawingCanvas/ContainerButtons.visible = true
 	else:
 		drawing_canvas_node.allowed_to_draw = false
 		$DrawingCanvas/ContainerButtons.visible = false
+	
+	if Client.round_data.gamestate == 0:
+		text_round_info_node.bbcode_text = "Game over!\nWaiting for the host to start a new game..."
+	elif Client.round_data.gamestate == 1:
+		text_round_info_node.bbcode_text = "Round %s\n%s's turn" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name]
+	elif Client.round_data.gamestate == 2:
+		text_round_info_node.bbcode_text = "Time to vote!\nClick on someones name to vote them as pretender."
 
 
 

@@ -3,6 +3,7 @@ extends Node
 
 const PORT = 9080
 const MIN_PLAYERS = 3
+const VOTING_ROUND = 3
 var server = null
 
 var possible_prompts = [
@@ -111,6 +112,9 @@ func on_data_recieved(id):
 			# create new round if amount of turns >= amount of players
 			round_data.current_round += 1
 			round_data.current_player_turn = 0
+
+			if round_data.current_round == VOTING_ROUND:
+				round_data.gamestate = 2
 			
 			canvas_data.append([])
 			canvas_data[len(canvas_data) - 1].append([])
