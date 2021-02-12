@@ -117,3 +117,13 @@ text = "Create Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextGameInfo" type="RichTextLabel" parent="."]
+margin_left = 13.0
+margin_top = 8.0
+margin_right = 333.0
+margin_bottom = 48.0
+text = "DrawingGame v0.2"
+__meta__ = {
+"_edit_use_anchors_": false
+}

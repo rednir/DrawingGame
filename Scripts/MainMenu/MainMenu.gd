@@ -1,8 +1,14 @@
 extends Control
 
 
+const GAME_NAME = "Drawing Game"
+const GAME_VERSION = "0.2"
+
+
+onready var text_game_info = $TextGameInfo
 onready var textbox_join = $MainButtonsContainer/JoinContainer/TextboxJoin
 onready var textbox_username = $MainButtonsContainer/TextboxUsername
+
 
 const min_name_length = 2
 
@@ -10,7 +16,9 @@ const min_name_length = 2
 func _ready():
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
-	pass
+
+	text_game_info.bbcode_text = "%s v%s" % [GAME_NAME, GAME_VERSION]
+
 
 
 
