@@ -48,7 +48,8 @@ func update_players_list():
 		for player in Client.list_of_players: 
 			var vote_button = Button.new()
 			vote_button.rect_size = Vector2(80, 50)
-			vote_button.text = player.name + (" (%s votes)" % Client.list_of_players[i].amount_of_votes)
+			vote_button.add_color_override("font_color", player.color)
+			vote_button.text = player.name + (" (%s votes)" % player.amount_of_votes)
 			if Client.this_player.has_voted:
 				vote_button.disabled = true
 
@@ -138,6 +139,7 @@ func on_button_leave_pressed():		# maybe make the client and server resets a sig
 	}
 	
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+
 
 
 
