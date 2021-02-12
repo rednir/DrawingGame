@@ -2,7 +2,7 @@ extends Control
 
 
 const GAME_NAME = "Drawing Game"
-const GAME_VERSION = "0.2"
+const GAME_VERSION = "0.2 (REPLACE)"
 
 
 onready var text_game_info = $TextGameInfo

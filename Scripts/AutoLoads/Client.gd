@@ -112,3 +112,12 @@ func on_new_turn():
 		name = "new_turn",
 		data = round_data
 	})
+
+
+
+
+func check_if_this_player_turn():
+	if len(list_of_players) > 0:
+		return list_of_players[round_data.current_player_turn].client_id == this_player.client_id and round_data.gamestate == 1
+	else:
+		return false

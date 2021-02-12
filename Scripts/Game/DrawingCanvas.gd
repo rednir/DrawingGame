@@ -32,6 +32,10 @@ func _draw():
 	
 	
 func _physics_process(_delta):
+	if current_mouse_pos == get_local_mouse_position():
+		# no point of drawing anything if the mouse position hasn't changed
+		return
+	
 	current_mouse_pos = get_local_mouse_position()
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw and Client.round_data.gamestate == 1:
@@ -48,7 +52,7 @@ func _physics_process(_delta):
 
 func add_line():
 	var turn_canvas_data = Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]
-	if len(turn_canvas_data) > MAX_PER_TURN:
+	if len(turn_canvas_data) >= MAX_PER_TURN:
 		allowed_to_draw = false
 		Events.emit_signal("info", "I think you've drawn a little too much...\nPress clear to restart your drawing.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait for dialog close
