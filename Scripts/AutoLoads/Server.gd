@@ -2,8 +2,8 @@ extends Node
 
 
 const PORT = 9080
-const MIN_PLAYERS = 0 # temp
-const VOTING_ROUND = 3
+const MIN_PLAYERS = 2 # temp
+const VOTING_ROUND = 2
 var server = null
 
 var possible_prompts = [

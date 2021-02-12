@@ -2,6 +2,9 @@ extends Panel
 
 
 
+const MAX_PER_TURN = 250
+
+
 onready var game_node = get_parent()
 onready var button_clear_node = $ContainerButtons/ButtonClear
 onready var button_submit_node = $ContainerButtons/ButtonSubmit
@@ -21,16 +24,14 @@ func _ready():
 	
 	
 func _draw():
-	#if len(Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]) == 0:
-	#	return # i honestly dont remember why i had this here
 	for game_round in range(len(Client.canvas_data)):
 		for game_turn in range(len(Client.canvas_data[game_round])):
 			for line in Client.canvas_data[game_round][game_turn]:
-				draw_line(line.from_pos, line.to_pos, line.color, line.width, true)
+				draw_line(line.from_pos, line.to_pos, line.color, line.width)
 	
 	
 	
-func _process(_delta):
+func _physics_process(_delta):
 	current_mouse_pos = get_local_mouse_position()
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw and Client.round_data.gamestate == 1:
@@ -41,10 +42,19 @@ func _process(_delta):
 	
 	update()
 	
+	
+	
 
 
 func add_line():
 	var turn_canvas_data = Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]
+	if len(turn_canvas_data) > MAX_PER_TURN:
+		allowed_to_draw = false
+		Events.emit_signal("info", "I think you've drawn a little too much...\nPress clear to restart your drawing.")
+		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait for dialog close
+		allowed_to_draw = true
+		return
+
 	var line_to_add
 	if is_currently_drawing:
 		# Continue the current stroke

@@ -21,6 +21,7 @@ func _ready():
 
 
 
+
 func show_dialog(title, message):
 	#OS.alert(message, title)
 	dialog = AcceptDialog.new()
