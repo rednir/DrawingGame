@@ -13,6 +13,7 @@ onready var text_prompt_node = $TextPrompt
 func _ready():
 	Events.connect("new_data", self, "on_new_data")
 	$DrawingCanvas/ContainerHostButtons/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
+	$DrawingCanvas/ContainerHostButtons/CheckboxOneLine.connect("toggled", self, "on_one_line_toggled")
 	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
 	if Server.server == null:
@@ -23,10 +24,10 @@ func _ready():
 
 
 
-func _process(_delta):
-	if Client.check_if_this_player_turn():
-		# TextRoundInfo also shows how much you've drawn and the max
-		text_round_info_node.bbcode_text = "Round %s\n%s's turn (%s/%s)" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name, len(Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]), drawing_canvas_node.MAX_PER_TURN]
+#func _process(_delta):
+#	pass
+		
+	
 
 
 
@@ -93,9 +94,14 @@ func update_round_info():
 	if Client.check_if_this_player_turn():
 		drawing_canvas_node.allowed_to_draw = true
 		$DrawingCanvas/ContainerButtons.visible = true
+		text_round_info_node.bbcode_text = "Round %s\n%s's turn (%s/%s)" % [Client.round_data.current_round + 1, Client.list_of_players[Client.round_data.current_player_turn].name, len(Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]), drawing_canvas_node.MAX_PER_TURN]
 	else:
 		drawing_canvas_node.allowed_to_draw = false
 		$DrawingCanvas/ContainerButtons.visible = false
+
+	if Client.round_data.is_one_line and Client.round_data.gamestate == 1:
+		text_round_info_node.append_bbcode("\nOne line mode is on!")
+		
 
 
 
@@ -117,30 +123,8 @@ func on_button_new_game_pressed():
 
 
 
-func on_button_leave_pressed():		# maybe make the client and server resets a signal
-	Server.server = null
-	Server.list_of_players = []
-	Server.prompt = "[Game not started]"
-	Server.canvas_data = [[[]]]
-	Server.round_data = {
-		gamestate = 0,
-		current_round = 0,
-		current_player_turn = 0,
-		pretender = null
-	}
-
-	Client.client = null
-	Client.list_of_players = []
-	Client.prompt = "Server hasn't given a prompt"
-	Server.canvas_data = [[[]]]
-	Server.round_data = {
-		gamestate = 0,
-		current_round = 0,
-		current_player_turn = 0,
-		pretender = null
-	}
-	
-	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+func on_button_leave_pressed():
+	Client.leave_game()
 
 
 
@@ -155,3 +139,9 @@ func on_button_vote_pressed(player_index):
 		name = "list_of_players",
 		data = Client.list_of_players
 	})
+
+
+
+
+func on_one_line_toggled(is_on):
+	Server.round_data.is_one_line = is_on

@@ -39,8 +39,7 @@ func _physics_process(_delta):
 	current_mouse_pos = get_local_mouse_position()
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw and Client.round_data.gamestate == 1:
-		add_line()
-		is_currently_drawing = true
+		is_currently_drawing = add_line()
 	else:
 		is_currently_drawing = false
 	
@@ -52,16 +51,24 @@ func _physics_process(_delta):
 
 func add_line():
 	var turn_canvas_data = Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]
+
 	if len(turn_canvas_data) >= MAX_PER_TURN:
 		allowed_to_draw = false
 		Events.emit_signal("info", "I think you've drawn a little too much...\nPress clear to restart your drawing.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait for dialog close
 		allowed_to_draw = true
-		return
+		return false
+	if Client.round_data.is_one_line and len(turn_canvas_data) > 0 and !is_currently_drawing:
+		allowed_to_draw = false
+		Events.emit_signal("info", "One line mode is enabled, and you just used your one line.\nPress the clear button if you think you messed up your drawing.")
+		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait for dialog close
+		allowed_to_draw = true
+		return false
+
 
 	var line_to_add
 	if is_currently_drawing:
-		# Continue the current stroke
+		# Continue the current line
 		line_to_add = {
 			from_pos = turn_canvas_data[len(turn_canvas_data) - 1].to_pos,
 			to_pos = current_mouse_pos,
@@ -69,7 +76,7 @@ func add_line():
 			width = 3
 		}
 	else:
-		# Start a new stroke, dont draw a line from the last point
+		# Start a new line, dont draw a straight line from the last point
 		line_to_add = {
 			from_pos = current_mouse_pos,
 			to_pos = current_mouse_pos,
@@ -77,6 +84,8 @@ func add_line():
 			width = 3
 		}
 	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].append(line_to_add)
+
+	return true
 
 
 

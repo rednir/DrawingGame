@@ -112,9 +112,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CheckboxOneLine" type="CheckBox" parent="DrawingCanvas/ContainerHostButtons"]
+margin_top = 57.0
+margin_right = 120.0
+margin_bottom = 81.0
+text = "Only One Line"
+
 [node name="ButtonNewGame" type="Button" parent="DrawingCanvas/ContainerHostButtons"]
 margin_top = 85.0
-margin_right = 118.0
+margin_right = 120.0
 margin_bottom = 109.0
 rect_min_size = Vector2( 0, 24 )
 rect_pivot_offset = Vector2( 78.785, 36 )

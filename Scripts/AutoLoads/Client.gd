@@ -4,22 +4,9 @@ extends Node
 var client = null
 
 var list_of_players = []
-var this_player = {
-	name = "Unspecified",
-	color = null,
-	client_id = null,
-	is_pretending = false,
-	amount_of_votes = 0,
-	has_voted = false
-}
+var this_player = Server.DEFAULT_PLAYER
 
-var round_data = {
-	gamestate = 0,
-	current_round = 0,
-	current_player_turn = 0,
-	pretender = null
-}
-
+var round_data = Server.DEFAULT_ROUND_DATA
 var canvas_data = [[[]]]
 var prompt = "Server hasn't given a prompt"
 
@@ -97,8 +84,29 @@ func on_data_recieved():
 		Events.emit_signal("info", "Game over!\nThe pretender was %s!" % round_data.pretender.name)
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait until dialog box has been closed
 		round_data.gamestate = 0
+	elif packet.name == "kick":
+		leave_game()
+		Events.emit_signal("info", "The server asked you to leave for the following reason:\n%s" % packet.data)
 
 	Events.emit_signal("new_data")
+
+
+
+func leave_game():
+	Server.server = null
+	Server.list_of_players = []
+	Server.prompt = "[Game not started]"
+	Server.canvas_data = [[[]]]
+	Server.round_data = Server.DEFAULT_ROUND_DATA
+
+	Client.client = null
+	Client.list_of_players = []
+	Client.prompt = "Server hasn't given a prompt"
+	Client.canvas_data = [[[]]]
+	Client.round_data = Server.DEFAULT_ROUND_DATA
+	Client.this_player = Server.DEFAULT_PLAYER
+	
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
 
@@ -117,7 +125,7 @@ func on_new_turn():
 
 
 func check_if_this_player_turn():
-	if len(list_of_players) > 0:
+	if len(list_of_players) > 0 and round_data.current_player_turn < len(list_of_players):
 		return list_of_players[round_data.current_player_turn].client_id == this_player.client_id and round_data.gamestate == 1
 	else:
 		return false
