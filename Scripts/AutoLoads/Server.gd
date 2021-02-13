@@ -143,9 +143,8 @@ func on_data_recieved(id):
 			round_data.current_player_turn += 1
 			canvas_data[len(canvas_data) - 1].append([])
 		
-		#print(canvas_data)
-		send_data_to_clients("round_data", round_data)
 		send_data_to_clients("canvas_data", canvas_data)
+		send_data_to_clients("round_data", round_data)
 	
 	
 

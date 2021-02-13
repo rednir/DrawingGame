@@ -3,7 +3,7 @@ extends Node
 
 
 signal new_turn
-signal new_data
+signal new_data(updated_data)
 signal new_game
 signal error(message)
 signal info(message)

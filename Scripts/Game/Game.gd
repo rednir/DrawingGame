@@ -33,11 +33,27 @@ func _ready():
 
 
 
-func on_new_data():
-	update_players_list()
-	update_prompt()
-	update_round_info()
-	drawing_canvas_node.update()
+func on_new_data(updated_data):
+	match updated_data:
+
+		"list_of_players":
+			update_players_list()
+
+		"prompt":
+			update_prompt()
+		
+		"round_data":
+			update_round_info()
+			update_players_list()	# cheap way of doing this, but if its voting round i also need players list to update to create buttons
+		
+		"canvas_data":
+			drawing_canvas_node.update()
+
+		_:
+			update_players_list()
+			update_prompt()
+			update_round_info()
+
 
 
 

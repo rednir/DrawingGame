@@ -72,23 +72,30 @@ func on_data_recieved():
 					print(this_player)
 					this_player = player
 					break
+
 	elif packet.name == "canvas_data":
 		canvas_data = packet.data
+
 	elif packet.name == "round_data":
 		round_data = packet.data
+
 	elif packet.name == "prompt":
 		prompt = packet.data
+
 	elif packet.name == "new_game":
 		Events.emit_signal("info", "It's a new game!\nYou are %s." % ("pretending, and must blend in" if this_player.is_pretending else "drawing, and must find the pretender"))
+	
 	elif packet.name == "everyone_has_voted":
 		Events.emit_signal("info", "Game over!\nThe pretender was %s!" % round_data.pretender.name)
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait until dialog box has been closed
 		round_data.gamestate = 0
+
 	elif packet.name == "kick":
 		leave_game()
 		Events.emit_signal("info", "The server asked you to leave for the following reason:\n%s" % packet.data)
 
-	Events.emit_signal("new_data")
+		
+	Events.emit_signal("new_data", packet.name)
 
 
 
