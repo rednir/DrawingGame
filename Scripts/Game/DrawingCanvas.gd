@@ -91,6 +91,10 @@ func add_line():
 		}
 	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].append(line_to_add)
 
+	if Client.check_if_this_player_turn():
+		# When its your turn, round info also shows how much left you can draw, so this should be updated constantly
+		game_node.update_round_info()
+
 	return true
 
 
@@ -124,4 +128,3 @@ func on_button_clear_pressed():
 
 func on_button_submit_pressed():
 	Events.emit_signal("new_turn")
-	canvas_animation_player.play("pulse_green")

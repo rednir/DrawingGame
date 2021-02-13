@@ -4,6 +4,7 @@ extends Node
 const PORT = 9080
 const MIN_PLAYERS = 2 # temp
 const VOTING_ROUND = 2
+const DEFAULT_CANVAS_DATA = [[[]]]
 const DEFAULT_ROUND_DATA = {
 	gamestate = 0,		# 0 is game over, 1 is game running, 2 is voting time
 	current_round = 0,
@@ -51,7 +52,7 @@ var list_of_players = [
 
 var round_data = DEFAULT_ROUND_DATA
 
-var canvas_data = [[[]]]
+var canvas_data = DEFAULT_CANVAS_DATA
 
 
 

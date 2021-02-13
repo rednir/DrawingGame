@@ -13,11 +13,31 @@ var dialog
 var dialog_bg
 var dialog_bg_style = StyleBoxFlat.new()
 
+var sound_player
+var sound = { 
+	notify_high = preload("res://Resources/notify_high.wav"),
+	notify_low = preload("res://Resources/notify_low.wav"),
+}
+
 
 
 func _ready():
 	connect("error", self, "on_error")
 	connect("info", self, "on_info")
+	
+
+
+func play_sound(sound_name):
+	#if Engine.get_main_loop().current_scene.get_node_or_null("SoundPlayer") != null:
+	#	sound_player.queue_free()
+		
+	sound_player = AudioStreamPlayer.new()
+	sound_player.name = "SoundPlayer"
+	Engine.get_main_loop().current_scene.add_child(sound_player)
+	sound_player.stream = sound.get(sound_name)
+	sound_player.play()
+	yield(sound_player, "finished")
+	sound_player.queue_free()
 
 
 
@@ -37,6 +57,7 @@ func show_dialog(title, message):
 	dialog.popup_centered()
 
 	return # i need to fix the below crashing on exported version, something to do with the bg i think
+
 
 	on_dialog_close()
 
@@ -64,11 +85,13 @@ func show_dialog(title, message):
 
 func on_error(message):
 	show_dialog("Error", message)
+	play_sound("notify_high")
 
 
 
 func on_info(message):
 	show_dialog("Info", message)
+	play_sound("notify_high")
 
 
 

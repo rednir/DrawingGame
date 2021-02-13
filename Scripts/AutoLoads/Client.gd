@@ -7,7 +7,7 @@ var list_of_players = []
 var this_player = Server.DEFAULT_PLAYER
 
 var round_data = Server.DEFAULT_ROUND_DATA
-var canvas_data = [[[]]]
+var canvas_data = Server.DEFAULT_CANVAS_DATA
 var prompt = "Server hasn't given a prompt"
 
 

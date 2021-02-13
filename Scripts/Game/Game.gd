@@ -22,7 +22,7 @@ func _ready():
 		$DrawingCanvas/ContainerHostButtons.visible = false
 	else:
 		#OS.alert("If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.", "Server")
-		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.")
+		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP (Port %s).\nOther people will then be able to use your public IP to join you." % Server.PORT)
 
 
 
@@ -47,6 +47,9 @@ func on_new_data(updated_data):
 			update_players_list()	# cheap way of doing this, but if its voting round i also need players list to update to create buttons
 		
 		"canvas_data":
+			if Client.canvas_data != Server.DEFAULT_CANVAS_DATA:
+				$DrawingCanvas.canvas_animation_player.play("pulse_green")
+				Events.play_sound("notify_low")
 			drawing_canvas_node.update()
 
 		_:
