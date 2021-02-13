@@ -47,7 +47,8 @@ func on_new_data(updated_data):
 			update_players_list()	# cheap way of doing this, but if its voting round i also need players list to update to create buttons
 		
 		"canvas_data":
-			if Client.canvas_data != Server.DEFAULT_CANVAS_DATA:
+			if Client.round_data.gamestate != 0:
+				# Only do this if player hasnt just joined
 				$DrawingCanvas.canvas_animation_player.play("pulse_green")
 				Events.play_sound("notify_low")
 			drawing_canvas_node.update()
@@ -56,6 +57,7 @@ func on_new_data(updated_data):
 			update_players_list()
 			update_prompt()
 			update_round_info()
+			drawing_canvas_node.update()
 
 
 
