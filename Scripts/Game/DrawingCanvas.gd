@@ -8,6 +8,7 @@ const MAX_PER_TURN = 250
 onready var game_node = get_parent()
 onready var button_clear_node = $ContainerButtons/ButtonClear
 onready var button_submit_node = $ContainerButtons/ButtonSubmit
+onready var canvas_animation_player = $DrawingCanvasAnimation
 
 
 var current_mouse_pos
@@ -17,9 +18,12 @@ var allowed_to_draw = false
 
 
 
+
 func _ready():
 	button_clear_node.connect("pressed", self, "on_button_clear_pressed")
 	button_submit_node.connect("pressed", self, "on_button_submit_pressed")
+	Client.client.connect("connection_established", self, "on_connected")
+	
 	
 	
 	
@@ -53,12 +57,14 @@ func add_line():
 	var turn_canvas_data = Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn]
 
 	if len(turn_canvas_data) >= MAX_PER_TURN:
+		canvas_animation_player.play("pulse_red")
 		allowed_to_draw = false
 		Events.emit_signal("info", "I think you've drawn a little too much...\nPress clear to restart your drawing.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait for dialog close
 		allowed_to_draw = true
 		return false
 	if Client.round_data.is_one_line and len(turn_canvas_data) > 0 and !is_currently_drawing:
+		canvas_animation_player.play("pulse_red")
 		allowed_to_draw = false
 		Events.emit_signal("info", "One line mode is enabled, and you just used your one line.\nPress the clear button if you think you messed up your drawing.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait for dialog close
@@ -105,6 +111,11 @@ func check_if_mouse_hover():
 
 
 
+func on_connected(_proto = ""):
+	canvas_animation_player.play("in")
+
+
+
 func on_button_clear_pressed():
 	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].clear()
 	update()
@@ -113,3 +124,4 @@ func on_button_clear_pressed():
 
 func on_button_submit_pressed():
 	Events.emit_signal("new_turn")
+	canvas_animation_player.play("pulse_green")

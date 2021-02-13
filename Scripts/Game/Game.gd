@@ -16,6 +16,8 @@ func _ready():
 	$DrawingCanvas/ContainerHostButtons/CheckboxOneLine.connect("toggled", self, "on_one_line_toggled")
 	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
+	$DrawingCanvas/ContainerButtons.visible = false
+
 	if Server.server == null:
 		$DrawingCanvas/ContainerHostButtons.visible = false
 	else:
@@ -124,6 +126,8 @@ func on_button_new_game_pressed():
 
 
 func on_button_leave_pressed():
+	drawing_canvas_node.canvas_animation_player.play_backwards("in")
+	yield(drawing_canvas_node.canvas_animation_player, "animation_finished")
 	Client.leave_game()
 
 
