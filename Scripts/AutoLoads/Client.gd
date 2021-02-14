@@ -52,7 +52,29 @@ func on_connected(_proto = ""):
 
 
 func on_closed(was_clean = false):
+	if this_player == Server.DEFAULT_PLAYER:
+		was_clean = true		# if never connected, i want to activate the unexpected disconnection message
+
 	print("[Client] Closed, was_clean=" + str(was_clean))
+	
+	Server.server = null
+	Server.list_of_players = []
+	Server.prompt = "[Game not started]"
+	Server.canvas_data = [[[]]]
+	Server.round_data = Server.DEFAULT_ROUND_DATA
+
+	if was_clean:		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now. maybe docs are wrong?
+		Events.emit_signal("error", "The connection to the server was lost unexpectedly.")
+		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")
+
+	Client.client = null
+	Client.list_of_players = []
+	Client.prompt = "Server hasn't given a prompt"
+	Client.canvas_data = [[[]]]
+	Client.round_data = Server.DEFAULT_ROUND_DATA
+	Client.this_player = Server.DEFAULT_PLAYER
+	
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
 
@@ -93,29 +115,12 @@ func on_data_recieved():
 		round_data.gamestate = 0
 
 	elif packet.name == "kick":
-		leave_game()
+		#leave_game()
 		Events.emit_signal("info", "The server asked you to leave for the following reason:\n%s" % packet.data)
 
 		
 	Events.emit_signal("new_data", packet.name)
 
-
-
-func leave_game():
-	Server.server = null
-	Server.list_of_players = []
-	Server.prompt = "[Game not started]"
-	Server.canvas_data = [[[]]]
-	Server.round_data = Server.DEFAULT_ROUND_DATA
-
-	Client.client = null
-	Client.list_of_players = []
-	Client.prompt = "Server hasn't given a prompt"
-	Client.canvas_data = [[[]]]
-	Client.round_data = Server.DEFAULT_ROUND_DATA
-	Client.this_player = Server.DEFAULT_PLAYER
-	
-	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
 

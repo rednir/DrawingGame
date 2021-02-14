@@ -159,7 +159,7 @@ func on_button_leave_pressed():
 func on_leave_game_confirmed():
 	drawing_canvas_node.canvas_animation_player.play_backwards("in")
 	yield(drawing_canvas_node.canvas_animation_player, "animation_finished")
-	Client.leave_game()
+	Client.client.disconnect_from_host(1000, "Client requested to leave game")
 
 
 
