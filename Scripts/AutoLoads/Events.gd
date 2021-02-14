@@ -17,6 +17,7 @@ var sound_player
 var sound = { 
 	notify_high = preload("res://Resources/notify_high.wav"),
 	notify_low = preload("res://Resources/notify_low.wav"),
+	clear = preload("res://Resources/clear.wav")
 }
 
 
@@ -37,7 +38,9 @@ func play_sound(sound_name):
 	sound_player.stream = sound.get(sound_name)
 	sound_player.play()
 	yield(sound_player, "finished")
-	sound_player.queue_free()
+	
+	if sound_player != null:
+		sound_player.queue_free()
 
 
 

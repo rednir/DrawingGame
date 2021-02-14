@@ -123,6 +123,7 @@ func on_connected(_proto = ""):
 
 
 func on_button_clear_pressed():
+	Events.play_sound("clear")
 	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].clear()
 	update()
 
