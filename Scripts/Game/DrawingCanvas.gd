@@ -41,7 +41,6 @@ func _physics_process(_delta):
 		return
 	
 	current_mouse_pos = get_local_mouse_position()
-
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and check_if_mouse_hover() and allowed_to_draw and Client.round_data.gamestate == 1:
 		is_currently_drawing = add_line()
 	else:

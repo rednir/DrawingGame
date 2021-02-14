@@ -47,15 +47,15 @@ func play_sound(sound_name):
 
 func show_dialog(title, message):
 	#OS.alert(message, title)
-	if Engine.get_main_loop().current_scene.get_node_or_null("AcceptDialog") != null:
-		Engine.get_main_loop().current_scene.get_node_or_null("AcceptDialog").queue_free()
+	if dialog != null:
+		dialog.hide()
 
 	dialog = AcceptDialog.new()
 	dialog.name = "AcceptDialog"
 
 	dialog.window_title = title
 	dialog.dialog_text = message
-	#dialog.connect("modal_closed", self, "on_dialog_close")
+	dialog.connect("hide", self, "on_dialog_close")
 	dialog.popup_exclusive = true
 
 	Engine.get_main_loop().current_scene.add_child(dialog)
@@ -78,7 +78,5 @@ func on_info(message):
 
 
 func on_dialog_close():
-	if dialog_bg != null:
-		dialog_bg.queue_free()
 	if dialog != null:
 		dialog.queue_free()
