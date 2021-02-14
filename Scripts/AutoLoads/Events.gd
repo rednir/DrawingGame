@@ -49,15 +49,15 @@ func play_sound(sound_name):
 
 func show_accept_dialog(title, message):
 	#OS.alert(message, title)
-	if accept_dialog != null:
-		accept_dialog.hide()
+	#if accept_dialog != null:
+	#	accept_dialog.hide()
 
 	accept_dialog = AcceptDialog.new()
 	accept_dialog.name = "AcceptDialog"
 
 	accept_dialog.window_title = title
 	accept_dialog.dialog_text = message
-	accept_dialog.connect("hide", self, "on_dialog_close")
+	accept_dialog.connect("hide", self, "on_dialog_close", [accept_dialog])
 	accept_dialog.popup_exclusive = true
 
 	Engine.get_main_loop().current_scene.add_child(accept_dialog)
@@ -67,15 +67,15 @@ func show_accept_dialog(title, message):
 
 
 func show_confirmation_dialog(title, message):
-	if confirmation_dialog != null:
-		confirmation_dialog.hide()
+	#if confirmation_dialog != null:
+	#	confirmation_dialog.hide()
 
 	confirmation_dialog = ConfirmationDialog.new()
 	confirmation_dialog.name = "ConfirmationDialog"
 
 	confirmation_dialog.window_title = title
 	confirmation_dialog.dialog_text = message
-	confirmation_dialog.connect("hide", self, "on_dialog_close")
+	confirmation_dialog.connect("hide", self, "on_dialog_close", [confirmation_dialog])
 	confirmation_dialog.popup_exclusive = true
 
 	Engine.get_main_loop().current_scene.add_child(confirmation_dialog)
@@ -102,8 +102,6 @@ func on_question(message):
 
 
 
-func on_dialog_close():
-	if accept_dialog != null:
-		accept_dialog.queue_free()
-	if confirmation_dialog != null:
-		confirmation_dialog.queue_free()
+func on_dialog_close(dialog):
+	if dialog != null:
+		dialog.queue_free()
