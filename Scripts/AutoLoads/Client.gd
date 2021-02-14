@@ -41,10 +41,11 @@ func try_join_server(url):
 
 func on_connected(_proto = ""):
 	print("[Client] Connected")
-	client.get_peer(1).put_var({
-		name = "this_player",
-		data = this_player
-	})
+	for _i in range (1):		# for easy debugging
+		client.get_peer(1).put_var({
+			name = "this_player",
+			data = this_player
+		})
 
 
 
