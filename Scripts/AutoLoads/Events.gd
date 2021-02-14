@@ -7,11 +7,12 @@ signal new_data(updated_data)
 signal new_game
 signal error(message)
 signal info(message)
+signal question(message)
 
 
-var dialog
-var dialog_bg
-var dialog_bg_style = StyleBoxFlat.new()
+var accept_dialog
+var confirmation_dialog
+
 
 var sound_player
 var sound = { 
@@ -25,6 +26,7 @@ var sound = {
 func _ready():
 	connect("error", self, "on_error")
 	connect("info", self, "on_info")
+	connect("question", self, "on_question")
 	
 
 
@@ -45,38 +47,63 @@ func play_sound(sound_name):
 
 
 
-func show_dialog(title, message):
+func show_accept_dialog(title, message):
 	#OS.alert(message, title)
-	if dialog != null:
-		dialog.hide()
+	if accept_dialog != null:
+		accept_dialog.hide()
 
-	dialog = AcceptDialog.new()
-	dialog.name = "AcceptDialog"
+	accept_dialog = AcceptDialog.new()
+	accept_dialog.name = "AcceptDialog"
 
-	dialog.window_title = title
-	dialog.dialog_text = message
-	dialog.connect("hide", self, "on_dialog_close")
-	dialog.popup_exclusive = true
+	accept_dialog.window_title = title
+	accept_dialog.dialog_text = message
+	accept_dialog.connect("hide", self, "on_dialog_close")
+	accept_dialog.popup_exclusive = true
 
-	Engine.get_main_loop().current_scene.add_child(dialog)
-	dialog.popup_centered()
+	Engine.get_main_loop().current_scene.add_child(accept_dialog)
+	accept_dialog.popup_centered()
+
+	
+
+
+func show_confirmation_dialog(title, message):
+	if confirmation_dialog != null:
+		confirmation_dialog.hide()
+
+	confirmation_dialog = ConfirmationDialog.new()
+	confirmation_dialog.name = "ConfirmationDialog"
+
+	confirmation_dialog.window_title = title
+	confirmation_dialog.dialog_text = message
+	confirmation_dialog.connect("hide", self, "on_dialog_close")
+	confirmation_dialog.popup_exclusive = true
+
+	Engine.get_main_loop().current_scene.add_child(confirmation_dialog)
+	confirmation_dialog.popup_centered()
 
 
 
 
 func on_error(message):
-	show_dialog("Error", message)
+	show_accept_dialog("Error", message)
 	play_sound("notify_high")
 
 
 
 func on_info(message):
-	show_dialog("Info", message)
+	show_accept_dialog("Info", message)
 	play_sound("notify_high")
 
 
 
+func on_question(message):
+	show_confirmation_dialog("Question", message)
+	play_sound("notify_high")
+
+
 
 func on_dialog_close():
-	if dialog != null:
-		dialog.queue_free()
+	if accept_dialog != null:
+		accept_dialog.queue_free()
+	if confirmation_dialog != null:
+		confirmation_dialog.queue_free()

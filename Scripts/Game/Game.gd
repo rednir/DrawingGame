@@ -147,6 +147,16 @@ func on_button_new_game_pressed():
 
 
 func on_button_leave_pressed():
+	if Client.round_data.gamestate == 0:
+		# if the game is over, no need to ask confirmation
+		on_leave_game_confirmed()
+	else:
+		Events.emit_signal("question", "The game is in progress.\nReally leave?")
+		Engine.get_main_loop().current_scene.get_node("ConfirmationDialog").get_ok().connect("pressed", self, "on_leave_game_confirmed")
+
+
+
+func on_leave_game_confirmed():
 	drawing_canvas_node.canvas_animation_player.play_backwards("in")
 	yield(drawing_canvas_node.canvas_animation_player, "animation_finished")
 	Client.leave_game()
