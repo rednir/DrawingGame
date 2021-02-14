@@ -41,6 +41,7 @@ func try_join_server(url):
 
 func on_connected(_proto = ""):
 	print("[Client] Connected")
+	VisualServer.set_default_clear_color(Color("2c2c54"))
 	for _i in range (2):		# for easy debugging
 		client.get_peer(1).put_var({
 			name = "this_player",

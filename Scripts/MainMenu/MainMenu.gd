@@ -15,6 +15,8 @@ const min_name_length = 2
 
 
 func _ready():
+	VisualServer.set_default_clear_color(Color("2c2c2f"))
+
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
 
