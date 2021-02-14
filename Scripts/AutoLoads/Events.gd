@@ -47,6 +47,8 @@ func play_sound(sound_name):
 
 func show_dialog(title, message):
 	#OS.alert(message, title)
+	if dialog != null:
+		dialog.queue_free()
 
 	dialog = AcceptDialog.new()
 	dialog.name = "AcceptDialog"
