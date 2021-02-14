@@ -60,7 +60,6 @@ func show_dialog(title, message):
 
 	Engine.get_main_loop().current_scene.add_child(dialog)
 	dialog.popup_centered()
-	print("pop")
 
 
 
