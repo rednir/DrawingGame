@@ -135,7 +135,7 @@ margin_left = 600.0
 margin_top = 60.0
 margin_right = 940.0
 margin_bottom = 540.0
-rect_pivot_offset = Vector2( 0, 240 )
+rect_pivot_offset = Vector2( 170, 240 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -239,7 +239,7 @@ anims/pulse_red = SubResource( 8 )
 margin_left = 56.0
 margin_top = 130.0
 margin_right = 400.0
-margin_bottom = 358.0
+margin_bottom = 235.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
