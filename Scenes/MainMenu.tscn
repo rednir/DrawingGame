@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Styles/Buttons/generic_button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
@@ -16,6 +16,12 @@ font_data = ExtResource( 6 )
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 13
+extra_spacing_top = -4
+extra_spacing_bottom = -4
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -118,7 +124,7 @@ __meta__ = {
 
 [node name="MainButtonsContainer" type="VBoxContainer" parent="."]
 margin_left = 426.0
-margin_top = 300.0
+margin_top = 268.0
 margin_right = 622.0
 margin_bottom = 452.0
 __meta__ = {
@@ -126,7 +132,7 @@ __meta__ = {
 }
 
 [node name="TextboxUsername" type="LineEdit" parent="MainButtonsContainer"]
-margin_right = 195.0
+margin_right = 196.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
@@ -137,16 +143,16 @@ custom_fonts/font = SubResource( 2 )
 align = 1
 max_length = 35
 context_menu_enabled = false
-placeholder_text = "Enter Username"
+placeholder_text = "Enter Name"
 placeholder_alpha = 0.3
 
 [node name="JoinContainer" type="HBoxContainer" parent="MainButtonsContainer"]
-margin_top = 92.0
-margin_right = 195.0
-margin_bottom = 120.0
+margin_top = 110.0
+margin_right = 196.0
+margin_bottom = 138.0
 
 [node name="TextboxJoin" type="LineEdit" parent="MainButtonsContainer/JoinContainer"]
-margin_right = 152.0
+margin_right = 153.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
@@ -161,8 +167,8 @@ placeholder_text = "Enter IP Address"
 placeholder_alpha = 0.3
 
 [node name="ButtonJoin" type="Button" parent="MainButtonsContainer/JoinContainer"]
-margin_left = 156.0
-margin_right = 195.0
+margin_left = 157.0
+margin_right = 196.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 64.5, 109 )
@@ -183,10 +189,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonCreate" type="Button" parent="MainButtonsContainer"]
-margin_top = 124.0
-margin_right = 195.0
+[node name="Label" type="Label" parent="MainButtonsContainer"]
+margin_top = 142.0
+margin_right = 196.0
 margin_bottom = 152.0
+custom_fonts/font = SubResource( 10 )
+text = "Or"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonCreate" type="Button" parent="MainButtonsContainer"]
+margin_top = 156.0
+margin_right = 196.0
+margin_bottom = 184.0
 rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 64.5, 109 )
 hint_tooltip = "
