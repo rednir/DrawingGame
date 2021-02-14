@@ -3,6 +3,10 @@ extends Control
 
 const GAME_NAME = "Drawing Game"
 const GAME_VERSION = "0.4"
+const MIN_NAME_LENGTH = 2
+
+
+const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
 
 
 onready var text_game_info = $TextGameInfo
@@ -11,7 +15,8 @@ onready var textbox_username = $MainButtonsContainer/TextboxUsername
 onready var main_buttons_animation_player = $MainButtonsContainer/MainButtonsAnimation
 
 
-const min_name_length = 2
+var settings_instance
+
 
 
 func _ready():
@@ -20,6 +25,7 @@ func _ready():
 
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
+	$ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
 
 	text_game_info.bbcode_text = "%s v%s" % [GAME_NAME, GAME_VERSION]
 	main_buttons_animation_player.play("in")
@@ -30,12 +36,11 @@ func _ready():
 
 
 func on_button_join_pressed():
-	disable_buttons(true)
-	main_buttons_animation_player.play("out")
+	main_buttons_transition("out")
 	yield(main_buttons_animation_player, "animation_finished")
 
 	var status_code = Client.try_join_server(textbox_join.text)
-	if len(textbox_username.text) < min_name_length:
+	if len(textbox_username.text) < MIN_NAME_LENGTH:
 		Events.emit_signal("error", "Username is too short")
 	else:
 		if status_code != OK:
@@ -45,19 +50,17 @@ func on_button_join_pressed():
 			get_tree().change_scene("res://Scenes/Game.tscn")
 			return
 
-	disable_buttons(false)
-	main_buttons_animation_player.play("in")
+	main_buttons_transition("in")
 
 
 
 		
 func on_button_create_pressed():
-	disable_buttons(true)
-	main_buttons_animation_player.play("out")
+	main_buttons_transition("out")
 	yield(main_buttons_animation_player, "animation_finished")
 
 	var status_code = Server.try_create_server()
-	if len(textbox_username.text) < min_name_length:
+	if len(textbox_username.text) < MIN_NAME_LENGTH:
 		Events.emit_signal("error", "Username is too short")
 	else:
 		if status_code != OK:
@@ -69,12 +72,31 @@ func on_button_create_pressed():
 			get_tree().change_scene("res://Scenes/Game.tscn")
 			return
 		
-	disable_buttons(false)
-	main_buttons_animation_player.play("in")
+	main_buttons_transition("in")
 
 
 
 
-func disable_buttons(will_disable):
-	$MainButtonsContainer/JoinContainer/ButtonJoin.disabled = will_disable
-	$MainButtonsContainer/ButtonCreate.disabled = will_disable
+func on_button_settings_pressed():
+	$ButtonSettings.visible = false
+	main_buttons_transition("out")
+	yield(main_buttons_animation_player, "animation_finished")
+
+	settings_instance = SettingsScene.instance()
+	settings_instance.connect("back", self, "on_button_settings_back_pressed")
+	self.add_child(settings_instance)
+
+
+
+
+func on_button_settings_back_pressed():
+	$ButtonSettings.visible = true
+	main_buttons_transition("in")
+	settings_instance.queue_free()
+
+
+
+func main_buttons_transition(anim):
+	main_buttons_animation_player.play(anim)
+	$MainButtonsContainer/JoinContainer/ButtonJoin.disabled = (anim == "out")
+	$MainButtonsContainer/ButtonCreate.disabled = (anim == "out")

@@ -25,6 +25,7 @@ config/icon="res://icon.png"
 Events="*res://Scripts/AutoLoads/Events.gd"
 Server="*res://Scripts/AutoLoads/Server.gd"
 Client="*res://Scripts/AutoLoads/Client.gd"
+Settings="*res://Scripts/AutoLoads/Settings.gd"
 
 [display]
 
