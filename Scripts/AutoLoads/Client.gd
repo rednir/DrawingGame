@@ -30,7 +30,7 @@ func try_join_server(url):
 	client.encode_buffer_max_size = 1000000					#
 	
 	client.connect("connection_established", self, "on_connected")
-	client.connect("connection_closed", self, "on_closed")
+	client.connect("connection_closed", self, "on_closed", [], CONNECT_DEFERRED)	# error message tells me i need to use this flag when setting client to null
 	client.connect("connection_error", self, "on_closed")
 	client.connect("data_received", self, "on_data_recieved")
 	
@@ -63,7 +63,7 @@ func on_closed(was_clean = false):
 	Server.canvas_data = [[[]]]
 	Server.round_data = Server.DEFAULT_ROUND_DATA
 
-	if was_clean:		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now. maybe docs are wrong?
+	if was_clean and Engine.get_main_loop().current_scene.get_name() != "MainMenuControl":		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now. maybe docs are wrong?
 		Events.emit_signal("error", "The connection to the server was lost unexpectedly.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")
 
@@ -73,7 +73,10 @@ func on_closed(was_clean = false):
 	Client.canvas_data = [[[]]]
 	Client.round_data = Server.DEFAULT_ROUND_DATA
 	Client.this_player = Server.DEFAULT_PLAYER
-	
+
+	if Engine.get_main_loop().current_scene.get_name() == "MainMenuControl":
+		return
+
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
