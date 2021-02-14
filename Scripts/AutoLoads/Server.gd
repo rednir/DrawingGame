@@ -220,7 +220,7 @@ func on_new_game():
 		Events.emit_signal("error", "In order to create a new round, you must have at least %s players connected." % MIN_PLAYERS)
 		return
 
-	canvas_data = [[[]]]
+	canvas_data = Server.DEFAULT_CANVAS_DATA
 
 	round_data.gamestate = 1
 	round_data.current_round = 0
