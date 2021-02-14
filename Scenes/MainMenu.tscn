@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Styles/Buttons/generic_button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
@@ -7,28 +7,34 @@
 [ext_resource path="res://Scripts/MainMenu/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=6]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="Curve" id=12]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0.00343643, -327.273 ), 0.0, 502.454, 0, 1, Vector2( 1, 173.455 ), 502.454, 0.0, 1, 0 ]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=3]
 size = 14
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=6]
 size = 13
 extra_spacing_top = -4
 extra_spacing_bottom = -4
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 6 )
 
-[sub_resource type="Animation" id=6]
-resource_name = "SETUP"
+[sub_resource type="Animation" id=8]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -55,8 +61,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "in"
+[sub_resource type="Animation" id=9]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -83,8 +88,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "out"
+[sub_resource type="Animation" id=10]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -111,7 +115,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 6 )
 
 [node name="MainMenuControl" type="Control"]
@@ -122,11 +126,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( 512, 900 )
+amount = 20
+lifetime = 50.0
+preprocess = 50.0
+emission_shape = 2
+emission_rect_extents = Vector2( 530, 1 )
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.5
+angle = 90.0
+angle_random = 1.0
+angle_curve = SubResource( 12 )
+scale_amount = 400.0
+scale_amount_random = 0.5
+color = Color( 0.192157, 0.192157, 0.207843, 1 )
+
 [node name="MainButtonsContainer" type="VBoxContainer" parent="."]
-margin_left = 426.0
-margin_top = 268.0
-margin_right = 622.0
-margin_bottom = 452.0
+margin_left = 427.0
+margin_top = 300.0
+margin_right = 623.0
+margin_bottom = 484.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -137,9 +161,9 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
 size_flags_vertical = 2
-custom_styles/focus = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 max_length = 35
 context_menu_enabled = false
@@ -157,9 +181,9 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
-custom_styles/focus = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 max_length = 60
 context_menu_enabled = false
@@ -177,9 +201,9 @@ hint_tooltip = "
 size_flags_horizontal = 3
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -193,7 +217,7 @@ __meta__ = {
 margin_top = 142.0
 margin_right = 196.0
 margin_bottom = 152.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 text = "Or"
 align = 1
 __meta__ = {
@@ -210,9 +234,9 @@ hint_tooltip = "
 "
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -224,17 +248,17 @@ __meta__ = {
 
 [node name="MainButtonsAnimation" type="AnimationPlayer" parent="MainButtonsContainer"]
 autoplay = "SETUP"
-anims/SETUP = SubResource( 6 )
-anims/in = SubResource( 7 )
-anims/out = SubResource( 8 )
+anims/SETUP = SubResource( 8 )
+anims/in = SubResource( 9 )
+anims/out = SubResource( 10 )
 
 [node name="TextGameInfo" type="RichTextLabel" parent="."]
 margin_left = 12.0
 margin_top = 10.0
 margin_right = 332.0
 margin_bottom = 84.0
-custom_fonts/normal_font = SubResource( 9 )
-text = "DrawingGame v0"
+custom_fonts/normal_font = SubResource( 11 )
+text = "Drawing Game v0.0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
