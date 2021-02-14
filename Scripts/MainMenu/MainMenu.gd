@@ -4,6 +4,7 @@ extends Control
 const GAME_NAME = "Drawing Game"
 const GAME_VERSION = "0.4"
 const MIN_NAME_LENGTH = 2
+const MIN_WINDOW_SIZE = Vector2(512, 300)
 
 
 const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
@@ -20,8 +21,9 @@ var settings_instance
 
 
 func _ready():
-	VisualServer.set_default_clear_color(Color("2c2c2f"))
+	OS.min_window_size = MIN_WINDOW_SIZE
 	OS.set_window_title("%s v%s" % [GAME_NAME, GAME_VERSION])
+	VisualServer.set_default_clear_color(Color("2c2c2f"))
 
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
