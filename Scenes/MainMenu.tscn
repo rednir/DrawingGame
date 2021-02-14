@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Styles/Buttons/generic_button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
@@ -21,6 +21,93 @@ font_data = ExtResource( 6 )
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 6 )
 
+[sub_resource type="Animation" id=6]
+resource_name = "SETUP"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 626, 300 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 626, 300 ), Vector2( 427, 300 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 4.75, 1 ),
+"update": 0,
+"values": [ Vector2( 427, 300 ), Vector2( 226, 300 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 4.75, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 6 )
+
 [node name="MainMenuControl" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,7 +126,7 @@ __meta__ = {
 }
 
 [node name="TextboxUsername" type="LineEdit" parent="MainButtonsContainer"]
-margin_right = 196.0
+margin_right = 195.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
@@ -55,11 +142,11 @@ placeholder_alpha = 0.3
 
 [node name="JoinContainer" type="HBoxContainer" parent="MainButtonsContainer"]
 margin_top = 92.0
-margin_right = 196.0
+margin_right = 195.0
 margin_bottom = 120.0
 
 [node name="TextboxJoin" type="LineEdit" parent="MainButtonsContainer/JoinContainer"]
-margin_right = 153.0
+margin_right = 152.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
@@ -74,8 +161,8 @@ placeholder_text = "Enter IP Address"
 placeholder_alpha = 0.3
 
 [node name="ButtonJoin" type="Button" parent="MainButtonsContainer/JoinContainer"]
-margin_left = 157.0
-margin_right = 196.0
+margin_left = 156.0
+margin_right = 195.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 64.5, 109 )
@@ -98,7 +185,7 @@ __meta__ = {
 
 [node name="ButtonCreate" type="Button" parent="MainButtonsContainer"]
 margin_top = 124.0
-margin_right = 196.0
+margin_right = 195.0
 margin_bottom = 152.0
 rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 64.5, 109 )
@@ -118,12 +205,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MainButtonsAnimation" type="AnimationPlayer" parent="MainButtonsContainer"]
+autoplay = "SETUP"
+anims/SETUP = SubResource( 6 )
+anims/in = SubResource( 7 )
+anims/out = SubResource( 8 )
+
 [node name="TextGameInfo" type="RichTextLabel" parent="."]
-margin_left = 13.0
-margin_top = 8.0
-margin_right = 333.0
-margin_bottom = 48.0
-text = "DrawingGame v0.2"
+margin_left = 12.0
+margin_top = 10.0
+margin_right = 332.0
+margin_bottom = 84.0
+custom_fonts/normal_font = SubResource( 9 )
+text = "DrawingGame v0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
