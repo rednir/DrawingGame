@@ -21,6 +21,7 @@ const DEFAULT_PLAYER = {
 	has_voted = false
 }
 
+var public_ip
 
 var server = null
 
@@ -58,7 +59,17 @@ var canvas_data = DEFAULT_CANVAS_DATA
 
 func _ready():
 	Events.connect("new_game", self, "on_new_game")
-	pass
+
+	var http_req = HTTPRequest.new()
+	Engine.get_main_loop().current_scene.add_child(http_req)
+	http_req.connect("request_completed", self, "on_ip_req_completed")
+	http_req.request("https://api.ipify.org")
+
+
+
+func on_ip_req_completed(_result, _response_code, _headers, body):
+	public_ip = body.get_string_from_utf8()
+
 
 
 

@@ -22,7 +22,7 @@ func _ready():
 		$DrawingCanvas/ContainerHostButtons.visible = false
 	else:
 		#OS.alert("If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.", "Server")
-		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP (Port %s).\nOther people will then be able to use your public IP to join you." % Server.PORT)
+		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP with port %s.\nOther people will then be able to use your public IP (%s) to join you." % [Server.PORT, Server.public_ip])
 
 
 
