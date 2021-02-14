@@ -34,5 +34,6 @@ window/stretch/aspect="keep"
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/intended_usage/framebuffer_allocation=0
 environment/default_clear_color=Color( 0.172549, 0.172549, 0.329412, 1 )
 environment/default_environment="res://default_env.tres"
