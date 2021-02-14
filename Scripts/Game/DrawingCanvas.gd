@@ -116,6 +116,8 @@ func check_if_mouse_hover():
 
 
 func on_connected(_proto = ""):
+	yield(Client.client, "data_received")
+	print("in")
 	canvas_animation_player.play("in")
 
 
