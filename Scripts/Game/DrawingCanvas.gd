@@ -121,6 +121,10 @@ func on_connected(_proto = ""):
 
 
 func on_button_clear_pressed():
+	if Client.round_data.is_no_clear:
+		Events.emit_signal("info", "The host has turned clearing off.\nYou'll have to deal with the mistake.")
+		return
+
 	Events.play_sound("clear")
 	Client.canvas_data[Client.round_data.current_round][Client.round_data.current_player_turn].clear()
 	update()

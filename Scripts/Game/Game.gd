@@ -13,7 +13,8 @@ onready var text_prompt_node = $TextPrompt
 func _ready():
 	Events.connect("new_data", self, "on_new_data")
 	$DrawingCanvas/ContainerHostButtons/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
-	$DrawingCanvas/ContainerHostButtons/CheckboxOneLine.connect("toggled", self, "on_one_line_toggled")
+	$DrawingCanvas/ContainerHostButtons/CheckboxOneLine.connect("toggled", self, "on_host_setting_toggled", ["is_one_line"])
+	$DrawingCanvas/ContainerHostButtons/CheckboxNoClear.connect("toggled", self, "on_host_setting_toggled", ["is_no_clear"])
 	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
 	$DrawingCanvas/ContainerButtons.visible = false
@@ -182,5 +183,9 @@ func on_button_vote_pressed(player_index):
 
 
 
-func on_one_line_toggled(is_on):
-	Server.round_data.is_one_line = is_on
+func on_host_setting_toggled(is_on, key):
+	Client.round_data[key] = is_on
+	Client.client.get_peer(1).put_var({
+		name = "round_data",
+		data = Client.round_data
+	})

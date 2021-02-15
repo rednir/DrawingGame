@@ -11,6 +11,7 @@ const DEFAULT_ROUND_DATA = {
 	current_round = 0,
 	current_player_turn = 0,
 	is_one_line = false,
+	is_no_clear = false,
 	pretender = null
 }
 const DEFAULT_PLAYER = {
@@ -122,7 +123,7 @@ func try_create_server():
 
 
 
-func on_data_recieved(id):
+func on_data_recieved(id):		# could make this a match statement instead of if
 	var packet = server.get_peer(id).get_var()
 	print("[Server] Data recieved from %d: %s " % [id, packet])
 
@@ -141,7 +142,11 @@ func on_data_recieved(id):
 
 	elif packet.name == "canvas_data":
 		canvas_data = packet.data
-		#send_data_to_clients("canvas_data", canvas_data) dont think i need this 
+		#send_data_to_clients("canvas_data", canvas_data)
+
+	elif packet.name == "round_data":		# as of writing this, only used when changing host settings (client.gd)
+		round_data = packet.data
+		send_data_to_clients("round_data", round_data)
 	
 	elif packet.name == "list_of_players":		# as of writing this, only used when adding votes
 		list_of_players = packet.data

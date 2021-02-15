@@ -12,13 +12,13 @@ min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0.00343643, -327.273 ), 0.0, 502.454, 0, 1, Vector2( 1, 173.455 ), 502.454, 0.0, 1, 0 ]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=3]
 size = 13
 extra_spacing_top = -3
 extra_spacing_bottom = -3
 font_data = ExtResource( 6 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -45,7 +45,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=5]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -72,7 +72,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -99,22 +99,22 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxEmpty" id=19]
+[sub_resource type="StyleBoxEmpty" id=8]
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=9]
 content_margin_bottom = 10.0
 draw_center = false
 
-[sub_resource type="StyleBoxEmpty" id=17]
+[sub_resource type="StyleBoxEmpty" id=10]
 
-[sub_resource type="StyleBoxEmpty" id=18]
+[sub_resource type="StyleBoxEmpty" id=11]
 
-[sub_resource type="StyleBoxEmpty" id=14]
+[sub_resource type="StyleBoxEmpty" id=12]
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=13]
 font_data = ExtResource( 6 )
 
 [node name="MainMenuControl" type="Control"]
@@ -206,7 +206,7 @@ __meta__ = {
 margin_top = 140.0
 margin_right = 196.0
 margin_bottom = 152.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 text = "Or"
 align = 1
 __meta__ = {
@@ -232,16 +232,16 @@ __meta__ = {
 
 [node name="MainButtonsAnimation" type="AnimationPlayer" parent="MainButtonsContainer"]
 autoplay = "SETUP"
-anims/SETUP = SubResource( 9 )
-anims/in = SubResource( 10 )
-anims/out = SubResource( 11 )
+anims/SETUP = SubResource( 4 )
+anims/in = SubResource( 5 )
+anims/out = SubResource( 6 )
 
 [node name="TextGameInfo" type="RichTextLabel" parent="."]
 margin_left = 12.0
 margin_top = 10.0
 margin_right = 332.0
 margin_bottom = 84.0
-custom_fonts/normal_font = SubResource( 13 )
+custom_fonts/normal_font = SubResource( 7 )
 text = "Drawing Game v0.0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -265,11 +265,11 @@ hint_tooltip = "Open Github"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/focus = SubResource( 17 )
-custom_styles/disabled = SubResource( 18 )
-custom_styles/normal = SubResource( 14 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
 icon = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -282,7 +282,7 @@ margin_right = 989.0
 margin_bottom = 31.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "Settings"
 underline = 1
 __meta__ = {
