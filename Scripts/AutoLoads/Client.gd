@@ -57,22 +57,22 @@ func on_closed(was_clean = false):
 
 	print("[Client] Closed, was_clean=" + str(was_clean))
 	
-	Server.server = null
 	Server.list_of_players = []
 	Server.prompt = "[Game not started]"
 	Server.canvas_data = Server.DEFAULT_CANVAS_DATA.duplicate(true)
 	Server.round_data = Server.DEFAULT_ROUND_DATA.duplicate(true)
+	Server.server = null
 
 	if was_clean and Engine.get_main_loop().current_scene.get_name() != "MainMenuControl":		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now. maybe docs are wrong?
 		Events.emit_signal("error", "The connection to the server was lost unexpectedly.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")
 
-	Client.client = null
 	Client.list_of_players = []
 	Client.prompt = "Server hasn't given a prompt"
 	Client.canvas_data = Server.DEFAULT_CANVAS_DATA.duplicate(true)
 	Client.round_data = Server.DEFAULT_ROUND_DATA.duplicate(true)
 	Client.this_player = Server.DEFAULT_PLAYER.duplicate(true)
+	Client.client = null
 
 	if Engine.get_main_loop().current_scene.get_name() == "MainMenuControl":
 		return
@@ -114,12 +114,13 @@ func on_data_recieved():
 	
 	elif packet.name == "everyone_has_voted":
 		Events.emit_signal("info", "Game over!\nThe pretender was %s!" % round_data.pretender.name)
-		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")	# wait until dialog box has been closed
+		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")
 		round_data.gamestate = 0
 
 	elif packet.name == "kick":
-		#leave_game()
 		Events.emit_signal("info", "The server asked you to leave for the following reason:\n%s" % packet.data)
+		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")
+		client.disconnect_from_host()
 
 		
 	Events.emit_signal("new_data", packet.name)

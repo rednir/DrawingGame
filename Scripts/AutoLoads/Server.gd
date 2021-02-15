@@ -2,7 +2,8 @@ extends Node
 
 
 const PORT = 9080
-const MIN_PLAYERS = 2 # temp
+const MIN_PLAYERS = 2 # this really should be 3
+const MAX_PLAYERS = 10
 const VOTING_ROUND = 2
 const DEFAULT_CANVAS_DATA = [[[]]]
 const DEFAULT_ROUND_DATA = {
@@ -122,6 +123,10 @@ func on_data_recieved(id):
 
 	if packet.name == "this_player":
 		# the player has just joined
+		if len(list_of_players) >= MAX_PLAYERS:
+			send_data_to_client_by_id("kick", "This game is full with %s players." % len(list_of_players), id)
+			return
+		
 		# add new player to the server's list of players, then update the client with game data
 		add_new_player(packet.data, id)
 		send_data_to_clients("list_of_players", list_of_players)	# all clients need to update their list_of_players
