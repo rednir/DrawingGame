@@ -23,7 +23,7 @@ const DEFAULT_PLAYER = {
 	has_voted = false
 }
 
-var public_ip = "unknown"
+var public_ip = null
 var ip_http_req = HTTPRequest.new()
 
 var server = null
@@ -73,6 +73,7 @@ func _ready():
 func on_ip_req_completed(_result, response_code, _headers, body):
 	if response_code != HTTPClient.RESPONSE_OK:
 		Events.emit_signal("error", "Could not get public IP (code: %d).\nAre you connected to the internet?" % response_code)
+		public_ip = "unspecified"
 		return
 	
 	public_ip = body.get_string_from_utf8()

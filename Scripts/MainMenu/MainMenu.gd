@@ -24,7 +24,7 @@ func _ready():
 	$BottomButtonsContainer/ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
 	$BottomButtonsContainer/ButtonGithub.connect("pressed", self, "on_button_github_pressed")
 	
-	if Server.ip_http_req != null:
+	if Server.public_ip == null:
 		Server.ip_http_req.connect("request_completed", self, "on_ip_got")
 	else:
 		on_ip_got(null, null, null, null)
