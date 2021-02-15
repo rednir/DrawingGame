@@ -161,7 +161,8 @@ func on_leave_game_confirmed():
 	$ButtonLeave.text = "Leaving..."
 	drawing_canvas_node.canvas_animation_player.play_backwards("in")
 	yield(drawing_canvas_node.canvas_animation_player, "animation_finished")
-	Client.client.disconnect_from_host(1000, "Client requested to leave game")
+	#Client.client.disconnect_from_host(1000, "Client requested to leave game")
+	Client.on_closed()
 
 
 
