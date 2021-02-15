@@ -11,7 +11,7 @@
 [ext_resource path="res://Styles/Checkbox/generic_checkbox_unchecked.png" type="Texture" id=9]
 [ext_resource path="res://Styles/WindowDialog/generic_windowdialog_panel.tres" type="StyleBox" id=10]
 [ext_resource path="res://Styles/Buttons/generic_button_disabled.tres" type="StyleBox" id=11]
-[ext_resource path="res://Fonts/textedit.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Fonts/textedit_font.tres" type="DynamicFont" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
