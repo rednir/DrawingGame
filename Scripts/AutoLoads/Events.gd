@@ -16,9 +16,9 @@ var confirmation_dialog
 
 var sound_player
 var sound = { 
-	notify_high = preload("res://Resources/notify_high.wav"),
-	notify_low = preload("res://Resources/notify_low.wav"),
-	clear = preload("res://Resources/clear.wav")
+	notify_high = preload("res://Resources/Sounds/notify_high.wav"),
+	notify_low = preload("res://Resources/Sounds/notify_low.wav"),
+	clear = preload("res://Resources/Sounds/clear.wav")
 }
 
 
