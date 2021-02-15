@@ -51,9 +51,9 @@ var list_of_players = [
 	#},
 ]
 
-var round_data = DEFAULT_ROUND_DATA
+var round_data = DEFAULT_ROUND_DATA.duplicate(true)
 
-var canvas_data = DEFAULT_CANVAS_DATA
+var canvas_data = DEFAULT_CANVAS_DATA.duplicate(true)
 
 
 
@@ -220,7 +220,7 @@ func on_new_game():
 		Events.emit_signal("error", "In order to create a new round, you must have at least %s players connected." % MIN_PLAYERS)
 		return
 
-	canvas_data = Server.DEFAULT_CANVAS_DATA
+	canvas_data = Server.DEFAULT_CANVAS_DATA.duplicate(true)
 
 	round_data.gamestate = 1
 	round_data.current_round = 0
