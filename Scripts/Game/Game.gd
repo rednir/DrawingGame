@@ -131,7 +131,7 @@ func update_round_info():
 
 func update_prompt():
 	if Client.round_data.gamestate == 0:
-		text_prompt_node.bbcode_text = "[Game not started]"
+		text_prompt_node.bbcode_text = "Waiting for host to start..."
 	else:
 		if Client.this_player.is_pretending:
 			text_prompt_node.bbcode_text = "Figure out the prompt!"

@@ -22,14 +22,14 @@ const DEFAULT_PLAYER = {
 	has_voted = false
 }
 
-var public_ip
+var public_ip = "unknown"
 
 var server = null
 
 var possible_prompts = [
 	"diary", "bottle", "water", "packet", "chewing gum", "tissue", "glasses", "watch", "sweet", "photo", "camera", "stamp", "postcard", "dictionary", "coin", "brush", "credit card", "identity", "card", "key", "mobile", "phone", "wallet", "button", "umbrella", "pen", "pencil", "lighter", "cigarette", "match", "lipstick", "purse", "case", "clip", "scissors", "rubber", "file", "banknote", "passport", "driving, licence", "comb", "notebook", "laptop", "rubbish", "mirror", "painkiller", "sunscreen", "toothbrush", "headphone", "player", "battery", "light bulb", "bin", "newspaper", "magazine", "alarm clock"
 ]
-var prompt = "[Game not started]"
+var prompt = "[SERVER INITAL PROMPT]"
 
 var player_colors = [
 	Color("27ae60"),		# green

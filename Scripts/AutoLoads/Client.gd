@@ -58,7 +58,7 @@ func on_closed(was_clean = false):
 	print("[Client] Closed, was_clean=" + str(was_clean))
 	
 	Server.list_of_players = []
-	Server.prompt = "[Game not started]"
+	Server.prompt = "[SERVER INITAL PROMPT]"
 	Server.canvas_data = Server.DEFAULT_CANVAS_DATA.duplicate(true)
 	Server.round_data = Server.DEFAULT_ROUND_DATA.duplicate(true)
 	Server.server = null
