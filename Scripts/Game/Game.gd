@@ -3,7 +3,7 @@ extends Control
 
 #onready var events = $Events
 onready var drawing_canvas_node = $DrawingCanvas
-onready var players_list_node = $PlayersList
+onready var players_list_node = $PlayersListScrollContainer/PanelContainer/PlayersList
 onready var text_round_info_node = $TextRoundInfo
 onready var text_prompt_node = $TextPrompt
 
@@ -75,6 +75,7 @@ func update_players_list():
 			var vote_button = Button.new()
 			vote_button.rect_size = Vector2(80, 50)
 			vote_button.add_color_override("font_color", player.color)
+			vote_button.margin_left = 10.0
 			vote_button.text = player.name + (" (%s votes)" % player.amount_of_votes)
 			if Client.this_player.has_voted:
 				vote_button.disabled = true
@@ -93,9 +94,9 @@ func update_players_list():
 		player_to_add.fit_content_height = true
 		player_to_add.push_color(player.color)
 		if player.client_id == Client.this_player.client_id:
-			player_to_add.add_text(player.name + " (you)")
+			player_to_add.add_text("  " + player.name + " (you)")
 		else:
-			player_to_add.add_text(player.name)
+			player_to_add.add_text("  " + player.name)
 		
 		players_list_node.add_child(player_to_add)
 		

@@ -3,7 +3,8 @@
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/SettingsMenu/SettingsMenu.gd" type="Script" id=2]
 [ext_resource path="res://Styles/Slider/generic_slider.tres" type="StyleBox" id=3]
-[ext_resource path="res://Styles/Slider/generic_grabber_area.tres" type="StyleBox" id=4]
+[ext_resource path="res://Styles/Slider/generic_slider_grabber_area.tres" type="StyleBox" id=4]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
