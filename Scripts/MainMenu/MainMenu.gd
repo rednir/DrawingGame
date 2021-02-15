@@ -17,16 +17,22 @@ var settings_instance
 func _ready():
 	VisualServer.set_default_clear_color(Color("2c2c2f"))
 
+	$BottomButtonsContainer.visible = false
+
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
-	$ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
-	$ButtonGithub.connect("pressed", self, "on_button_github_pressed")
+	$BottomButtonsContainer/ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
+	$BottomButtonsContainer/ButtonGithub.connect("pressed", self, "on_button_github_pressed")
+	
+	Server.ip_http_req.connect("request_completed", self, "on_ip_got")
 
 	text_game_info.bbcode_text = "%s %s" % [Settings.GAME_NAME, Settings.GAME_VERSION]
+
+
+
+func on_ip_got(_result, _response_code, _headers, _body):
 	main_buttons_animation_player.play("in")
-
-
-
+	$BottomButtonsContainer.visible = true
 
 
 
@@ -73,7 +79,7 @@ func on_button_create_pressed():
 
 
 func on_button_settings_pressed():
-	$ButtonSettings.visible = false
+	$BottomButtonsContainer.visible = false
 	main_buttons_transition("out")
 	yield(main_buttons_animation_player, "animation_finished")
 
@@ -85,7 +91,7 @@ func on_button_settings_pressed():
 
 
 func on_button_settings_back_pressed():
-	$ButtonSettings.visible = true
+	$BottomButtonsContainer.visible = true
 	main_buttons_transition("in")
 	settings_instance.queue_free()
 

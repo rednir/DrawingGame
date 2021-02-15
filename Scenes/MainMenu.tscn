@@ -252,6 +252,7 @@ margin_left = 18.0
 margin_top = 557.0
 margin_right = 1007.0
 margin_bottom = 597.0
+dragger_visibility = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
