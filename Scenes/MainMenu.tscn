@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Themes/generic_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Resources/github.svg" type="Texture" id=2]
 [ext_resource path="res://Scripts/MainMenu/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=6]
 
@@ -39,7 +40,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 626, 300 ) ]
+"values": [ Vector2( 614, 300 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -66,7 +67,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 0.25, 1 ),
 "update": 0,
-"values": [ Vector2( 626, 300 ), Vector2( 427, 300 ) ]
+"values": [ Vector2( 614, 300 ), Vector2( 414, 300 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -93,7 +94,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 4.75, 1 ),
 "update": 0,
-"values": [ Vector2( 427, 300 ), Vector2( 226, 300 ) ]
+"values": [ Vector2( 414, 300 ), Vector2( 214, 300 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -113,6 +114,18 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=13]
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+[sub_resource type="StyleBoxFlat" id=20]
+content_margin_bottom = 10.0
+draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=14]
 
 [node name="MainMenuControl" type="Control"]
 anchor_right = 1.0
@@ -256,6 +269,23 @@ margin_right = 332.0
 margin_bottom = 84.0
 custom_fonts/normal_font = SubResource( 13 )
 text = "Drawing Game v0.0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonGithub" type="Button" parent="."]
+margin_left = 19.0
+margin_top = 556.0
+margin_right = 43.0
+margin_bottom = 588.0
+hint_tooltip = "Open Github"
+mouse_default_cursor_shape = 2
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/focus = SubResource( 17 )
+custom_styles/disabled = SubResource( 18 )
+custom_styles/normal = SubResource( 14 )
+icon = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

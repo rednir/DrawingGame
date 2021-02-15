@@ -3,6 +3,7 @@ extends Control
 
 const GAME_NAME = "Drawing Game"
 const GAME_VERSION = "0.4"
+const LINK_TO_GITHUB = "https://github.com/rednir/DrawingGame"
 const MIN_NAME_LENGTH = 2
 const MIN_WINDOW_SIZE = Vector2(512, 300)
 
@@ -28,6 +29,7 @@ func _ready():
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
 	$ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
+	$ButtonGithub.connect("pressed", self, "on_button_github_pressed")
 
 	text_game_info.bbcode_text = "%s v%s" % [GAME_NAME, GAME_VERSION]
 	main_buttons_animation_player.play("in")
@@ -95,6 +97,12 @@ func on_button_settings_back_pressed():
 	$ButtonSettings.visible = true
 	main_buttons_transition("in")
 	settings_instance.queue_free()
+
+
+
+
+func on_button_github_pressed():
+	OS.shell_open(LINK_TO_GITHUB)
 
 
 
