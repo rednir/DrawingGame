@@ -1,9 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Styles/Buttons/generic_button_normal.tres" type="StyleBox" id=1]
-[ext_resource path="res://Styles/Buttons/generic_button_hover.tres" type="StyleBox" id=2]
-[ext_resource path="res://Styles/Buttons/generic_button_pressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://Styles/LineEdit/generic_lineedit_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://Themes/generic_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/MainMenu/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=6]
 
@@ -14,13 +11,9 @@ min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0.00343643, -327.273 ), 0.0, 502.454, 0, 1, Vector2( 1, 173.455 ), 502.454, 0.0, 1, 0 ]
 
-[sub_resource type="StyleBoxEmpty" id=3]
-
 [sub_resource type="DynamicFont" id=4]
 size = 14
 font_data = ExtResource( 6 )
-
-[sub_resource type="StyleBoxEmpty" id=5]
 
 [sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 6 )
@@ -124,6 +117,7 @@ font_data = ExtResource( 6 )
 [node name="MainMenuControl" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -164,8 +158,6 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
 size_flags_vertical = 2
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = SubResource( 4 )
 align = 1
 max_length = 35
@@ -179,13 +171,11 @@ margin_right = 196.0
 margin_bottom = 136.0
 
 [node name="TextboxJoin" type="LineEdit" parent="MainButtonsContainer/JoinContainer"]
-margin_right = 153.0
+margin_right = 143.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = SubResource( 4 )
 align = 1
 max_length = 60
@@ -194,7 +184,7 @@ placeholder_text = "Enter IP Address"
 placeholder_alpha = 0.3
 
 [node name="ButtonJoin" type="Button" parent="MainButtonsContainer/JoinContainer"]
-margin_left = 157.0
+margin_left = 147.0
 margin_right = 196.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
@@ -202,10 +192,6 @@ rect_pivot_offset = Vector2( 64.5, 109 )
 hint_tooltip = "
 "
 size_flags_horizontal = 3
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -235,10 +221,6 @@ rect_min_size = Vector2( 0, 28 )
 rect_pivot_offset = Vector2( 64.5, 109 )
 hint_tooltip = "
 "
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = SubResource( 8 )
 custom_colors/font_color_disabled = Color( 0.427451, 0.427451, 0.427451, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
