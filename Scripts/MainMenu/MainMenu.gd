@@ -37,11 +37,6 @@ func on_ip_got(_result, _response_code, _headers, _body):
 	main_buttons_animation_player.play("in")
 	$BottomButtonsContainer.visible = true
 
-func on_ip_got(_result, _response_code, _headers, _body):
-	main_buttons_animation_player.play("in")
-	$BottomButtonsContainer.visible = true
-
-
 
 
 func on_button_join_pressed():
