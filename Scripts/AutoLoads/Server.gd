@@ -32,16 +32,16 @@ var possible_prompts = [
 var prompt = "[Game not started]"
 
 var player_colors = [
-	Color.green,
-	Color.red,
-	Color.yellow,
-	Color.pink,
-	Color.turquoise,
-	Color.violet,
-	Color.yellowgreen,
-	Color.salmon,
-	Color.purple,
-	Color.cyan
+	Color("27ae60"),		# green
+	Color("c0392b"),		# red
+	Color("2980b9"),		# blue
+	Color("f39c12"),		# orange
+	Color("f78fb3"),		# pink
+	Color("1abc9c"),		# turquoise
+	Color("8e44ad"),		# purple
+	Color("badc58"),		# lime
+	Color("f19066"),		# salmon
+	Color("c44569")			# rose
 ]
 
 var list_of_players = [
