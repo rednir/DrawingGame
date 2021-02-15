@@ -24,9 +24,13 @@ func _ready():
 	$BottomButtonsContainer/ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
 	$BottomButtonsContainer/ButtonGithub.connect("pressed", self, "on_button_github_pressed")
 	
-	Server.ip_http_req.connect("request_completed", self, "on_ip_got")
+	if Server.ip_http_req != null:
+		Server.ip_http_req.connect("request_completed", self, "on_ip_got")
+	else:
+		on_ip_got(null, null, null, null)
 
 	text_game_info.bbcode_text = "%s %s" % [Settings.GAME_NAME, Settings.GAME_VERSION]
+
 
 
 
@@ -34,6 +38,7 @@ func on_ip_got(_result, _response_code, _headers, _body):
 	main_buttons_animation_player.play("in")
 	$BottomButtonsContainer.visible = true
 
+	
 
 
 func on_button_join_pressed():
