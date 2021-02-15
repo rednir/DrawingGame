@@ -60,7 +60,7 @@ func on_closed(was_clean = false):
 	Server.server = null
 	Server.list_of_players = []
 	Server.prompt = "[Game not started]"
-	Server.canvas_data = [[[]]]
+	Server.canvas_data = Server.DEFAULT_CANVAS_DATA
 	Server.round_data = Server.DEFAULT_ROUND_DATA
 
 	if was_clean and Engine.get_main_loop().current_scene.get_name() != "MainMenuControl":		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now. maybe docs are wrong?
@@ -70,7 +70,7 @@ func on_closed(was_clean = false):
 	Client.client = null
 	Client.list_of_players = []
 	Client.prompt = "Server hasn't given a prompt"
-	Client.canvas_data = [[[]]]
+	Client.canvas_data = Server.DEFAULT_CANVAS_DATA
 	Client.round_data = Server.DEFAULT_ROUND_DATA
 	Client.this_player = Server.DEFAULT_PLAYER
 
