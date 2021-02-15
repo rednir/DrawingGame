@@ -1,13 +1,6 @@
 extends Control
 
 
-const GAME_NAME = "Drawing Game"
-const GAME_VERSION = "0.4"
-const LINK_TO_GITHUB = "https://github.com/rednir/DrawingGame"
-const MIN_NAME_LENGTH = 2
-const MIN_WINDOW_SIZE = Vector2(512, 300)
-
-
 const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
 
 
@@ -22,8 +15,6 @@ var settings_instance
 
 
 func _ready():
-	OS.min_window_size = MIN_WINDOW_SIZE
-	OS.set_window_title("%s v%s" % [GAME_NAME, GAME_VERSION])
 	VisualServer.set_default_clear_color(Color("2c2c2f"))
 
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
@@ -31,7 +22,7 @@ func _ready():
 	$ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
 	$ButtonGithub.connect("pressed", self, "on_button_github_pressed")
 
-	text_game_info.bbcode_text = "%s v%s" % [GAME_NAME, GAME_VERSION]
+	text_game_info.bbcode_text = "%s %s" % [Settings.GAME_NAME, Settings.GAME_VERSION]
 	main_buttons_animation_player.play("in")
 
 
@@ -44,7 +35,7 @@ func on_button_join_pressed():
 	yield(main_buttons_animation_player, "animation_finished")
 
 	var status_code = Client.try_join_server(textbox_join.text)
-	if len(textbox_username.text) < MIN_NAME_LENGTH:
+	if len(textbox_username.text) < Settings.MIN_NAME_LENGTH:
 		Events.emit_signal("error", "Username is too short")
 	else:
 		if status_code != OK:
@@ -64,7 +55,7 @@ func on_button_create_pressed():
 	yield(main_buttons_animation_player, "animation_finished")
 
 	var status_code = Server.try_create_server()
-	if len(textbox_username.text) < MIN_NAME_LENGTH:
+	if len(textbox_username.text) < Settings.MIN_NAME_LENGTH:
 		Events.emit_signal("error", "Username is too short")
 	else:
 		if status_code != OK:
@@ -102,7 +93,9 @@ func on_button_settings_back_pressed():
 
 
 func on_button_github_pressed():
-	OS.shell_open(LINK_TO_GITHUB)
+	var code = OS.shell_open("https://github.com/%s" % Settings.REPO_PATH)
+	if code != OK:
+		Events.emit_signal("error", "Could not open page.")
 
 
 
