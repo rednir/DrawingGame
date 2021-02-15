@@ -68,7 +68,11 @@ func _ready():
 
 
 
-func on_ip_req_completed(_result, _response_code, _headers, body):
+func on_ip_req_completed(_result, response_code, _headers, body):
+	if response_code != HTTPClient.RESPONSE_OK:
+		Events.emit_signal("error", "Could not get public IP (code: %d).\nAre you connected to the internet?" % response_code)
+		return
+	
 	public_ip = body.get_string_from_utf8()
 
 
