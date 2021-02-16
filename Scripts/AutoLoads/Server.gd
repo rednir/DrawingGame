@@ -248,6 +248,7 @@ func on_new_game():
 		player.has_voted = false
 
 	randomize()
+	list_of_players.shuffle()
 	var pretender_index = randi() % len(list_of_players)
 	round_data.pretender = list_of_players[pretender_index]
 	list_of_players[pretender_index].is_pretending = true
