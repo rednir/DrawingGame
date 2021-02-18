@@ -2,12 +2,14 @@ extends Control
 
 
 const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
+const LoadingIconScene = preload("res://Scenes/LoadingIcon.tscn")
 
 
 onready var text_game_info = $TextGameInfo
 onready var textbox_join = $MainButtonsContainer/JoinContainer/TextboxJoin
 onready var textbox_username = $MainButtonsContainer/TextboxUsername
 onready var main_buttons_animation_player = $MainButtonsContainer/MainButtonsAnimation
+onready var loading_icon_instance = LoadingIconScene.instance()
 
 
 var settings_instance
@@ -26,6 +28,7 @@ func _ready():
 	
 	if Server.public_ip == null:
 		Server.ip_http_req.connect("request_completed", self, "on_ip_got")
+		self.add_child(loading_icon_instance)
 	else:
 		on_ip_got(null, null, null, null)
 
@@ -33,9 +36,14 @@ func _ready():
 
 
 
+
+
 func on_ip_got(_result, _response_code, _headers, _body):
 	main_buttons_animation_player.play("in")
+	if loading_icon_instance != null:		# might cause crashes in release build
+		loading_icon_instance.get_node("AnimationPlayer").play("out")
 	$BottomButtonsContainer.visible = true
+
 
 
 

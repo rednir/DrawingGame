@@ -1,17 +1,20 @@
 extends Control
 
 
-#onready var events = $Events
+const LoadingIconScene = preload("res://Scenes/LoadingIcon.tscn")
+
+
 onready var drawing_canvas_node = $DrawingCanvas
 onready var players_list_node = $PlayersListScrollContainer/PanelContainer/PlayersList
 onready var text_round_info_node = $TextRoundInfo
 onready var text_prompt_node = $TextPrompt
-
+onready var loading_icon_instance = LoadingIconScene.instance()
 
 
 
 func _ready():
 	Events.connect("new_data", self, "on_new_data")
+	Client.client.connect("connection_established", self, "on_connected")
 	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
 	$DrawingCanvas/ContainerButtons.visible = false
@@ -24,12 +27,14 @@ func _ready():
 		$HostTools/GameControlContainer/CheckboxNoClear.connect("toggled", self, "on_host_setting_toggled", ["is_no_clear"])
 		$HostTools/ButtonHelpJoin.connect("pressed", self, "on_button_help_join_pressed")
 
+	self.add_child(loading_icon_instance)
 
 
-#func _process(_delta):
-#	pass
+
+
+func on_connected(_proto = ""):
+	loading_icon_instance.get_node("AnimationPlayer").play("out")
 		
-	
 
 
 

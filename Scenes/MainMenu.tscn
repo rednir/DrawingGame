@@ -147,9 +147,10 @@ scale_amount_random = 0.5
 color = Color( 0.192157, 0.192157, 0.207843, 1 )
 
 [node name="MainButtonsContainer" type="VBoxContainer" parent="."]
-margin_left = 414.0
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 614.0
 margin_top = 300.0
-margin_right = 610.0
+margin_right = 810.0
 margin_bottom = 484.0
 __meta__ = {
 "_edit_use_anchors_": false
