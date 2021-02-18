@@ -12,9 +12,6 @@ onready var text_prompt_node = $TextPrompt
 
 func _ready():
 	Events.connect("new_data", self, "on_new_data")
-	$HostTools/GameControlContainer/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
-	$HostTools/GameControlContainer/CheckboxOneLine.connect("toggled", self, "on_host_setting_toggled", ["is_one_line"])
-	$HostTools/GameControlContainer/CheckboxNoClear.connect("toggled", self, "on_host_setting_toggled", ["is_no_clear"])
 	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
 	$DrawingCanvas/ContainerButtons.visible = false
@@ -22,8 +19,10 @@ func _ready():
 	if Server.server == null:
 		$HostTools.visible = false
 	else:
-		#OS.alert("If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.", "Server")
-		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP with port %s.\nOther people will then be able to use your public IP (%s) to join you." % [Server.PORT, Server.public_ip])
+		$HostTools/GameControlContainer/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
+		$HostTools/GameControlContainer/CheckboxOneLine.connect("toggled", self, "on_host_setting_toggled", ["is_one_line"])
+		$HostTools/GameControlContainer/CheckboxNoClear.connect("toggled", self, "on_host_setting_toggled", ["is_no_clear"])
+		$HostTools/ButtonHelpJoin.connect("pressed", self, "on_button_help_join_pressed")
 
 
 
@@ -64,6 +63,9 @@ func on_new_data(updated_data):
 
 
 func update_players_list():
+	if Server.server != null:
+			$HostTools/ButtonHelpJoin.visible = len(Client.list_of_players) <= 1
+
 	# First remove all players in the list
 	for child in players_list_node.get_children():
 		players_list_node.remove_child(child)
@@ -189,3 +191,8 @@ func on_host_setting_toggled(is_on, key):
 		name = "round_data",
 		data = Client.round_data
 	})
+
+
+
+func on_button_help_join_pressed():
+	Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP with port %s.\nOther people will then be able to use your public IP (%s) to join you." % [Server.PORT, Server.public_ip])

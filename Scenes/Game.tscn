@@ -300,3 +300,10 @@ text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ButtonHelpJoin" type="LinkButton" parent="HostTools"]
+margin_left = 173.0
+margin_top = 269.0
+margin_right = 349.0
+margin_bottom = 292.0
+text = "How can people join me?"
