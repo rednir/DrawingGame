@@ -65,7 +65,7 @@ func _ready():
 
 	Engine.get_main_loop().current_scene.add_child(ip_http_req)
 	ip_http_req.connect("request_completed", self, "on_ip_req_completed")
-	ip_http_req.timeout = 5
+	ip_http_req.timeout = 7
 	ip_http_req.request("https://api.ipify.org")
 
 
