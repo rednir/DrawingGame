@@ -37,6 +37,7 @@ func play_sound(sound_name):
 	sound_player = AudioStreamPlayer.new()
 	Engine.get_main_loop().current_scene.add_child(sound_player)
 	sound_player.name = "SoundPlayer"
+	sound_player.volume_db = Settings.config.audio.master_volume
 	sound_player.stream = sound.get(sound_name)
 	sound_player.play()
 	yield(sound_player, "finished")
