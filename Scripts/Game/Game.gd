@@ -12,15 +12,15 @@ onready var text_prompt_node = $TextPrompt
 
 func _ready():
 	Events.connect("new_data", self, "on_new_data")
-	$DrawingCanvas/ContainerHostButtons/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
-	$DrawingCanvas/ContainerHostButtons/CheckboxOneLine.connect("toggled", self, "on_host_setting_toggled", ["is_one_line"])
-	$DrawingCanvas/ContainerHostButtons/CheckboxNoClear.connect("toggled", self, "on_host_setting_toggled", ["is_no_clear"])
+	$HostTools/GameControlContainer/ButtonNewGame.connect("pressed", self, "on_button_new_game_pressed")
+	$HostTools/GameControlContainer/CheckboxOneLine.connect("toggled", self, "on_host_setting_toggled", ["is_one_line"])
+	$HostTools/GameControlContainer/CheckboxNoClear.connect("toggled", self, "on_host_setting_toggled", ["is_no_clear"])
 	$ButtonLeave.connect("pressed", self, "on_button_leave_pressed")
 
 	$DrawingCanvas/ContainerButtons.visible = false
 
 	if Server.server == null:
-		$DrawingCanvas/ContainerHostButtons.visible = false
+		$HostTools.visible = false
 	else:
 		#OS.alert("If you want someone to be able to join you over a different network, you must port forward your private IP.\nOther people will then be able to use your public IP to join you.", "Server")
 		Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP with port %s.\nOther people will then be able to use your public IP (%s) to join you." % [Server.PORT, Server.public_ip])

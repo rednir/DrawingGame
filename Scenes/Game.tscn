@@ -169,47 +169,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ContainerHostButtons" type="VBoxContainer" parent="DrawingCanvas"]
-margin_left = -148.0
-margin_top = 370.0
-margin_right = -30.0
-margin_bottom = 479.0
-rect_pivot_offset = Vector2( -84.3149, 137 )
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CheckboxOneLine" type="CheckBox" parent="DrawingCanvas/ContainerHostButtons"]
-margin_top = 31.0
-margin_right = 118.0
-margin_bottom = 54.0
-text = "One Line"
-align = 1
-
-[node name="CheckboxNoClear" type="CheckBox" parent="DrawingCanvas/ContainerHostButtons"]
-margin_top = 58.0
-margin_right = 118.0
-margin_bottom = 81.0
-text = "No Clear"
-align = 1
-
-[node name="ButtonNewGame" type="Button" parent="DrawingCanvas/ContainerHostButtons"]
-margin_top = 85.0
-margin_right = 118.0
-margin_bottom = 109.0
-rect_min_size = Vector2( 0, 24 )
-rect_pivot_offset = Vector2( 78.785, 36 )
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 0.490196 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-text = "New Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="DrawingCanvasAnimation" type="AnimationPlayer" parent="DrawingCanvas"]
 autoplay = "SETUP"
 anims/SETUP = SubResource( 3 )
@@ -290,6 +249,54 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostTools" type="Control" parent="."]
+margin_right = 21.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameControlContainer" type="VBoxContainer" parent="HostTools"]
+margin_left = 452.0
+margin_top = 430.0
+margin_right = 570.0
+margin_bottom = 539.0
+rect_pivot_offset = Vector2( -84.3149, 137 )
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckboxOneLine" type="CheckBox" parent="HostTools/GameControlContainer"]
+margin_top = 31.0
+margin_right = 118.0
+margin_bottom = 54.0
+text = "One Line"
+align = 1
+
+[node name="CheckboxNoClear" type="CheckBox" parent="HostTools/GameControlContainer"]
+margin_top = 58.0
+margin_right = 118.0
+margin_bottom = 81.0
+text = "No Clear"
+align = 1
+
+[node name="ButtonNewGame" type="Button" parent="HostTools/GameControlContainer"]
+margin_top = 85.0
+margin_right = 118.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 0, 24 )
+rect_pivot_offset = Vector2( 78.785, 36 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0.490196 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
