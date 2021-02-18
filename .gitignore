@@ -2,3 +2,4 @@ Release/
 .import/
 *.import
 .mono/
+*.keystore
