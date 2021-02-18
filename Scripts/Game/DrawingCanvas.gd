@@ -2,7 +2,7 @@ extends Panel
 
 
 
-const MAX_PER_TURN = 250
+const MAX_PER_TURN = 300
 
 
 onready var game_node = get_parent()
