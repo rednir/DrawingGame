@@ -2,7 +2,7 @@ extends Node
 
 
 const GAME_NAME = "Drawing Game"
-const GAME_VERSION = "v0.4"
+const GAME_VERSION = "v0.5"
 const REPO_PATH = "rednir/DrawingGame"
 const MIN_NAME_LENGTH = 2
 const MIN_WINDOW_SIZE = Vector2(512, 300)
@@ -30,9 +30,13 @@ func check_if_latest_release():
 func on_github_req_completed(_result, response_code, _headers, body):
 	if response_code != HTTPClient.RESPONSE_OK:
 		return
-	
+
 	var latest_release = JSON.parse(body.get_string_from_utf8()).result
-	if float(latest_release.tag_name.lstrip("v")) > float(GAME_VERSION.lstrip("v")):
+	
+	var current_game_version_no = float(GAME_VERSION.lstrip("v"))
+	var latest_game_version_no = float(latest_release.tag_name.lstrip("v"))
+
+	if latest_game_version_no > current_game_version_no:
 		Events.emit_signal("question", "You are not on the latest release.\nDownload %s?" % latest_release.tag_name)
 		Engine.get_main_loop().current_scene.get_node("ConfirmationDialog").get_ok().connect("pressed", self, "on_download_latest_confirmed")
 
