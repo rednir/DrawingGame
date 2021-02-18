@@ -99,9 +99,6 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=7]
-font_data = ExtResource( 6 )
-
 [sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxFlat" id=9]
@@ -115,6 +112,9 @@ draw_center = false
 [sub_resource type="StyleBoxEmpty" id=12]
 
 [sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 6 )
 
 [node name="MainMenuControl" type="Control"]
@@ -147,10 +147,9 @@ scale_amount_random = 0.5
 color = Color( 0.192157, 0.192157, 0.207843, 1 )
 
 [node name="MainButtonsContainer" type="VBoxContainer" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 614.0
+margin_left = 414.0
 margin_top = 300.0
-margin_right = 810.0
+margin_right = 610.0
 margin_bottom = 484.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -237,28 +236,17 @@ anims/SETUP = SubResource( 4 )
 anims/in = SubResource( 5 )
 anims/out = SubResource( 6 )
 
-[node name="TextGameInfo" type="RichTextLabel" parent="."]
-margin_left = 12.0
-margin_top = 10.0
-margin_right = 332.0
-margin_bottom = 84.0
-custom_fonts/normal_font = SubResource( 7 )
-text = "Drawing Game v0.0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BottomButtonsContainer" type="HSplitContainer" parent="."]
+[node name="BottomBarContainer" type="HSplitContainer" parent="."]
 margin_left = 18.0
 margin_top = 557.0
 margin_right = 1007.0
 margin_bottom = 597.0
-dragger_visibility = 1
+dragger_visibility = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonGithub" type="Button" parent="BottomButtonsContainer"]
+[node name="ButtonGithub" type="Button" parent="BottomBarContainer"]
 margin_top = 8.0
 margin_right = 24.0
 margin_bottom = 32.0
@@ -276,7 +264,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonSettings" type="LinkButton" parent="BottomButtonsContainer"]
+[node name="ButtonSettings" type="LinkButton" parent="BottomBarContainer"]
 margin_left = 929.0
 margin_top = 8.0
 margin_right = 989.0
@@ -286,6 +274,36 @@ size_flags_vertical = 4
 custom_fonts/font = SubResource( 13 )
 text = "Settings"
 underline = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBarContainer" type="HSplitContainer" parent="."]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1009.0
+margin_bottom = 41.0
+dragger_visibility = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextGameInfo" type="RichTextLabel" parent="TopBarContainer"]
+margin_right = 947.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 7 )
+text = "Drawing Game v0.0"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonExit" type="Button" parent="TopBarContainer"]
+margin_left = 947.0
+margin_right = 994.0
+margin_bottom = 26.0
+text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
