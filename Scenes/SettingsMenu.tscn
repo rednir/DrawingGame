@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/SettingsMenu/SettingsMenu.gd" type="Script" id=2]
 [ext_resource path="res://Themes/generic_theme.tres" type="Theme" id=3]
 [ext_resource path="res://Styles/Panel/bgdim_panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://Fonts/text_font.tres" type="DynamicFont" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -68,13 +69,26 @@ size_flags_horizontal = 3
 step = 10.0
 
 [node name="ButtonBack" type="LinkButton" parent="."]
-margin_left = 965.52
-margin_top = 561.26
-margin_right = 1007.52
-margin_bottom = 584.26
+margin_left = 286.278
+margin_top = 168.221
+margin_right = 325.278
+margin_bottom = 191.221
 custom_fonts/font = SubResource( 1 )
 text = "Back"
 underline = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 281.178
+margin_top = 561.941
+margin_right = 740.178
+margin_bottom = 586.941
+custom_fonts/font = ExtResource( 5 )
+text = "To open the settings menu at any time, press Ctrl+O"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

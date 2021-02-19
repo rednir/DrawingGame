@@ -2,6 +2,7 @@ extends Control
 
 
 const LoadingIconScene = preload("res://Scenes/LoadingIcon.tscn")
+const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
 
 
 onready var drawing_canvas_node = $DrawingCanvas
@@ -9,6 +10,9 @@ onready var players_list_node = $PlayersListScrollContainer/PanelContainer/Playe
 onready var text_round_info_node = $TextRoundInfo
 onready var text_prompt_node = $TextPrompt
 onready var loading_icon_instance = LoadingIconScene.instance()
+
+
+var settings_instance
 
 
 
@@ -28,6 +32,13 @@ func _ready():
 		$HostTools/ButtonHelpJoin.connect("pressed", self, "on_button_help_join_pressed")
 
 	self.add_child(loading_icon_instance)
+
+
+
+
+func _process(delta):
+	if Input.get_action_strength("open_settings") == 1 and settings_instance == null:
+		on_button_settings_pressed()
 
 
 
@@ -146,6 +157,14 @@ func update_prompt():
 			text_prompt_node.bbcode_text = "Figure out the prompt!"
 		else:
 			text_prompt_node.bbcode_text = "Draw %s" % Client.prompt
+
+
+
+
+func on_button_settings_pressed():
+	settings_instance = SettingsScene.instance()
+	self.add_child(settings_instance)
+
 
 
 

@@ -4,9 +4,6 @@ extends Control
 onready var settings_container = $CenterContainer/SettingsContainer
 
 
-signal back
-
-
 func _ready():
 	$ButtonBack.connect("pressed", self, "on_button_back_pressed")
 	generate_settings_menu()
@@ -90,7 +87,7 @@ func generate_settings_menu():
 
 
 func on_button_back_pressed():
-	emit_signal("back")
+	self.queue_free()
 
 
 

@@ -39,6 +39,12 @@ func _ready():
 
 
 
+func _process(delta):
+	if Input.get_action_strength("open_settings") == 1 and settings_instance == null:
+		on_button_settings_pressed()
+
+
+
 
 func on_ip_got(_result, _response_code, _headers, _body):
 	main_buttons_animation_player.play("in")
@@ -96,21 +102,8 @@ func on_button_create_pressed():
 
 
 func on_button_settings_pressed():
-	$BottomBarContainer.visible = false
-	main_buttons_transition("out")
-	yield(main_buttons_animation_player, "animation_finished")
-
 	settings_instance = SettingsScene.instance()
-	settings_instance.connect("back", self, "on_button_settings_back_pressed")
 	self.add_child(settings_instance)
-
-
-
-
-func on_button_settings_back_pressed():
-	$BottomBarContainer.visible = true
-	main_buttons_transition("in")
-	settings_instance.queue_free()
 
 
 
