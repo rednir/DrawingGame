@@ -8,46 +8,92 @@ const MIN_NAME_LENGTH = 2
 const MIN_WINDOW_SIZE = Vector2(512, 300)
 const CONFIG_PATH = "user://config.ini"
 
-
-var config_file = ConfigFile.new()
-var config = {
+# keys called "tab_data" hold constant data for the parent tab, not stored in the config file or visible in settings menu
+const DEFAULT_CONFIG = {
 	display = {
+		tab_data = {
+			display_name = "Display",
+			description = "",
+			type = "Tab",
+			value = null
+		},
 		resolution = {
 			display_name = "",
 			description = "",
+			type = null,
 			value = Vector2(1024, 600)
 		},
 		possible_resolutions = {
 			display_name = "Resolution",
 			description = "Set the size of the window in pixels.",
-			value = [Vector2(1024, 600), Vector2(1228, 720), Vector2(1536, 900), Vector2(1843, 1080)]
+			type = "MenuButton",
+			value = [Vector2(819, 480), Vector2(1024, 600), Vector2(1228, 720), Vector2(1311, 768), Vector2(1536, 900), Vector2(1843, 1080)]
 		},
 		is_fullscreen = {
 			display_name = "Fullscreen",
 			description = "Toggle whether the window takes up the entire screen.",
+			type = "CheckBox",
 			value = false
 		}
 	},
 	audio = {
+		tab_data = {
+			display_name = "Audio",
+			description = "",
+			type = "Tab",
+			value = null
+		},
 		master_volume = {
 			display_name = "Master Volume",
 			description = "Controls volume of all sounds.",
-			value = -10
+			type = "HSlider",
+			value = -10,
+			slider_prop = {
+				min_value = -100,
+				max_value = 0,
+				step = 8
+			}
 		},
 	},
 	game = {
+		tab_data = {
+			display_name = "Game",
+			description = "",
+			type = "Tab",
+			value = null
+		},
 		last_name = {
 			display_name = "",
 			description = "",
+			type = null,
 			value = ""
 		},
 		drawing_fps = {
 			display_name = "Drawing Framerate",
-			description = "Controls how many times to draw every second.\nTry adjust this if your drawings look polygonal.",
+			description = "Controls the number of times per second a line is drawn.\nTry adjust this if your drawings look polygonal.",
+			type = "LineEdit",
 			value = 50
+		}
+	},
+	misc = {
+		tab_data = {
+			display_name = "Misc",
+			description = "",
+			type = "Tab",
+			value = null
+		},
+		reset = {
+			display_name = "Reset Settings",
+			description = "Changes all settings to their original state.",
+			type = "Button",
+			value = null
 		}
 	}
 }
+
+var config = DEFAULT_CONFIG.duplicate(true)
+var config_file = ConfigFile.new()
+
 
 
 func _ready():
@@ -80,6 +126,9 @@ func load_config():
 		
 	for section in config.keys():
 		for key in config[section].keys():
+			if config[section][key].value == null:
+				# settings that have default value null aren't stored (used for tab display names)
+				continue
 			config[section][key].value = config_file.get_value(section, key, config[section][key].value)
 
 	return OK
@@ -90,6 +139,9 @@ func load_config():
 func save_config():
 	for section in config.keys():
 		for key in config[section].keys():
+			if config[section][key].value == null:
+				# settings that have default value null aren't stored (used for tab display names)
+				continue
 			config_file.set_value(section, key, config[section][key].value)
 
 	if config_file.save(CONFIG_PATH) != OK:
@@ -111,8 +163,21 @@ func create_config_file():
 
 
 func update_game_values_with_config():
-	OS.window_size = config.display.resolution.value
+	# dont adjust window size if fullscreen is on
+	if !config.display.is_fullscreen.value:
+		OS.window_size = config.display.resolution.value
+
 	OS.window_fullscreen = config.display.is_fullscreen.value
+	
+
+
+
+
+func reset_config():
+	config = DEFAULT_CONFIG.duplicate(true)
+	save_config()
+	update_game_values_with_config()
+	
 
 
 

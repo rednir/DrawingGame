@@ -18,7 +18,8 @@ var sound_player
 var sound = { 
 	notify_high = preload("res://Resources/Sounds/notify_high.wav"),
 	notify_low = preload("res://Resources/Sounds/notify_low.wav"),
-	clear = preload("res://Resources/Sounds/clear.wav")
+	clear = preload("res://Resources/Sounds/clear.wav"),
+	volumebar = preload("res://Resources/Sounds/volumebar.wav")
 }
 
 

@@ -46,20 +46,17 @@ margin_right = 430.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="CenterContainer/SettingsContainer/VBoxContainer/HBoxContainer"]
-margin_right = 342.0
+margin_right = 213.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "sadfsadf"
 
-[node name="LineEdit" type="LineEdit" parent="CenterContainer/SettingsContainer/VBoxContainer/HBoxContainer"]
-margin_left = 346.0
-margin_right = 410.0
-margin_bottom = 24.0
-
-[node name="CheckBox" type="CheckBox" parent="CenterContainer/SettingsContainer/VBoxContainer/HBoxContainer"]
-margin_left = 414.0
+[node name="HSlider" type="HSlider" parent="CenterContainer/SettingsContainer/VBoxContainer/HBoxContainer"]
+margin_left = 217.0
 margin_right = 430.0
 margin_bottom = 24.0
+size_flags_horizontal = 3
+step = 10.0
 
 [node name="ButtonBack" type="LinkButton" parent="."]
 margin_left = 965.52
