@@ -23,7 +23,7 @@ func _ready():
 
 	$MainButtonsContainer/JoinContainer/ButtonJoin.connect("pressed", self, "on_button_join_pressed")
 	$MainButtonsContainer/ButtonCreate.connect("pressed", self, "on_button_create_pressed")
-	$BottomBarContainer/ButtonSettings.connect("pressed", self, "on_button_settings_pressed")
+	$BottomBarContainer/ButtonSettings.connect("pressed", Events, "open_settings")
 	$BottomBarContainer/ButtonGithub.connect("pressed", self, "on_button_github_pressed")
 	$TopBarContainer/ButtonExit.connect("pressed", self, "on_button_exit_pressed")
 	
@@ -34,18 +34,11 @@ func _ready():
 		on_ip_got(null, null, null, null)
 
 	text_game_info.bbcode_text = "%s %s" % [Settings.GAME_NAME, Settings.GAME_VERSION]
-	
+
 	if Settings.config.game.default_name.value == "":
 		textbox_username.text = Settings.config.game.last_name.value
 	else:
 		textbox_username.text = Settings.config.game.default_name.value
-
-
-
-
-func _process(delta):
-	if Input.get_action_strength("open_settings") == 1 and settings_instance == null:
-		on_button_settings_pressed()
 
 
 
@@ -101,14 +94,6 @@ func on_button_create_pressed():
 			return
 		
 	main_buttons_transition("in")
-
-
-
-
-func on_button_settings_pressed():
-	settings_instance = SettingsScene.instance()
-	self.add_child(settings_instance)
-
 
 
 

@@ -1,6 +1,7 @@
 extends Node
 
 
+const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
 
 signal new_turn
 signal new_data(updated_data)
@@ -13,6 +14,7 @@ signal question(message)
 var accept_dialog
 var confirmation_dialog
 
+var settings_instance
 
 var sound_player
 var sound = { 
@@ -28,6 +30,19 @@ func _ready():
 	connect("error", self, "on_error")
 	connect("info", self, "on_info")
 	connect("question", self, "on_question")
+
+
+
+func _process(_delta):
+	if Input.get_action_strength("open_settings") == 1 and settings_instance == null:
+		open_settings()
+
+
+
+func open_settings():
+	settings_instance = SettingsScene.instance()
+	Engine.get_main_loop().current_scene.add_child(settings_instance)
+
 	
 
 
