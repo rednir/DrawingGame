@@ -219,4 +219,4 @@ func on_host_setting_toggled(is_on, key):
 
 
 func on_button_help_join_pressed():
-	Events.emit_signal("info", "If you want someone to be able to join you over a different network, you must port forward your private IP with port %s.\nOther people will then be able to use your public IP (%s) to join you." % [Server.PORT, Server.public_ip])
+	Events.emit_signal("info", "If someone is on the same network as you, they can put use 'localhost' to join.\n\nFor someone to be able to join you over a different network, you must port forward your private IP with port %s.\nOther people will then be able to use your public IP (%s) to join you." % [Server.PORT, Server.public_ip])
