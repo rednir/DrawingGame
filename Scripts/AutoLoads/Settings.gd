@@ -49,7 +49,7 @@ const DEFAULT_CONFIG = {
 			type = "HSlider",
 			value = -10,
 			range_prop = {
-				min_value = -100,
+				min_value = -70,
 				max_value = 0,
 				step = 8
 			}
