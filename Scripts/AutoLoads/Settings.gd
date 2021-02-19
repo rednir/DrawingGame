@@ -54,6 +54,12 @@ const DEFAULT_CONFIG = {
 				step = 8
 			}
 		},
+		is_muted = {
+			display_name = "Mute Audio",
+			description = "Toggle whether audio will play or not",
+			type = "CheckBox",
+			value = false
+		}
 	},
 	game = {
 		tab_data = {

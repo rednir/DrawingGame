@@ -34,6 +34,8 @@ func _ready():
 func play_sound(sound_name):
 	#if Engine.get_main_loop().current_scene.get_node_or_null("SoundPlayer") != null:
 	#	sound_player.queue_free()
+	if Settings.config.audio.is_muted.value:
+		return
 		
 	sound_player = AudioStreamPlayer.new()
 	Engine.get_main_loop().current_scene.add_child(sound_player)
