@@ -41,6 +41,14 @@ func generate_settings_menu():
 					item.text = str(current_key.value)
 					item.connect("text_changed", self, "on_setting_changed", [section_name, key_name])
 					key_container.add_child(label)
+				"SpinBox":
+					item = SpinBox.new()
+					item.max_value = current_key.range_prop.max_value
+					item.min_value = current_key.range_prop.min_value
+					item.step = current_key.range_prop.step
+					item.value = int(current_key.value)
+					item.connect("value_changed", self, "on_setting_changed", [section_name, key_name])
+					key_container.add_child(label)
 				"MenuButton":
 					item = MenuButton.new()
 					item.get_popup().connect("index_pressed", self, "on_setting_changed", [section_name, key_name])
@@ -60,9 +68,9 @@ func generate_settings_menu():
 					key_container.add_child(label)
 				"HSlider":
 					item = HSlider.new()
-					item.max_value = current_key.slider_prop.max_value
-					item.min_value = current_key.slider_prop.min_value
-					item.step = current_key.slider_prop.step
+					item.max_value = current_key.range_prop.max_value
+					item.min_value = current_key.range_prop.min_value
+					item.step = current_key.range_prop.step
 					item.value = current_key.value
 					item.connect("value_changed", self, "on_setting_changed", [section_name, key_name])
 					key_container.add_child(label)

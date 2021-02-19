@@ -48,7 +48,7 @@ const DEFAULT_CONFIG = {
 			description = "Controls volume of all sounds.",
 			type = "HSlider",
 			value = -10,
-			slider_prop = {
+			range_prop = {
 				min_value = -100,
 				max_value = 0,
 				step = 8
@@ -71,8 +71,13 @@ const DEFAULT_CONFIG = {
 		drawing_fps = {
 			display_name = "Drawing Framerate",
 			description = "Controls the number of times per second a line is drawn.\nTry adjust this if your drawings look polygonal.",
-			type = "LineEdit",
-			value = 50
+			type = "SpinBox",
+			value = 50,
+			range_prop = {
+				min_value = 10,
+				max_value = 60,
+				step = 1
+			}
 		}
 	},
 	misc = {
@@ -168,6 +173,7 @@ func update_game_values_with_config():
 		OS.window_size = config.display.resolution.value
 
 	OS.window_fullscreen = config.display.is_fullscreen.value
+	Engine.iterations_per_second = config.game.drawing_fps.value
 	
 
 
