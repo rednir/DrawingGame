@@ -34,7 +34,7 @@ func _ready():
 		on_ip_got(null, null, null, null)
 
 	text_game_info.bbcode_text = "%s %s" % [Settings.GAME_NAME, Settings.GAME_VERSION]
-	textbox_username.text = Settings.config.game.last_name
+	textbox_username.text = Settings.config.game.last_name.value
 
 
 
@@ -50,7 +50,7 @@ func on_ip_got(_result, _response_code, _headers, _body):
 
 
 func on_button_join_pressed():
-	Settings.config.game.last_name = textbox_username.text
+	Settings.config.game.last_name.value = textbox_username.text
 
 	main_buttons_transition("out")
 	yield(main_buttons_animation_player, "animation_finished")
@@ -72,7 +72,7 @@ func on_button_join_pressed():
 
 		
 func on_button_create_pressed():
-	Settings.config.game.last_name = textbox_username.text
+	Settings.config.game.last_name.value = textbox_username.text
 	
 	main_buttons_transition("out")
 	yield(main_buttons_animation_player, "animation_finished")

@@ -12,16 +12,40 @@ const CONFIG_PATH = "user://config.ini"
 var config_file = ConfigFile.new()
 var config = {
 	display = {
-		resolution = Vector2(1024, 600),
-		possible_resolutions = [Vector2(1024, 600), Vector2(1228, 720), Vector2(1536, 900), Vector2(1843, 1080)],
-		is_fullscreen = false
+		resolution = {
+			display_name = "",
+			description = "",
+			value = Vector2(1024, 600)
+		},
+		possible_resolutions = {
+			display_name = "Resolution",
+			description = "Set the size of the window in pixels.",
+			value = [Vector2(1024, 600), Vector2(1228, 720), Vector2(1536, 900), Vector2(1843, 1080)]
+		},
+		is_fullscreen = {
+			display_name = "Fullscreen",
+			description = "Toggle whether the window takes up the entire screen.",
+			value = false
+		}
 	},
 	audio = {
-		master_volume = -10,
+		master_volume = {
+			display_name = "Master Volume",
+			description = "Controls volume of all sounds.",
+			value = -10
+		},
 	},
 	game = {
-		last_name = "",
-		drawing_fps = 50
+		last_name = {
+			display_name = "",
+			description = "",
+			value = ""
+		},
+		drawing_fps = {
+			display_name = "Drawing Framerate",
+			description = "Controls how many times to draw every second.\nTry adjust this if your drawings look polygonal.",
+			value = 50
+		}
 	}
 }
 
@@ -56,7 +80,7 @@ func load_config():
 		
 	for section in config.keys():
 		for key in config[section].keys():
-			config[section][key] = config_file.get_value(section, key, config[section][key])
+			config[section][key].value = config_file.get_value(section, key, config[section][key].value)
 
 	return OK
 
@@ -66,7 +90,7 @@ func load_config():
 func save_config():
 	for section in config.keys():
 		for key in config[section].keys():
-			config_file.set_value(section, key, config[section][key])
+			config_file.set_value(section, key, config[section][key].value)
 
 	if config_file.save(CONFIG_PATH) != OK:
 		Events.emit_signal("info", "Could not save the config file\nThe game may not have sufficient privileges.")
@@ -87,8 +111,8 @@ func create_config_file():
 
 
 func update_game_values_with_config():
-	OS.window_size = config.display.resolution
-	OS.window_fullscreen = config.display.is_fullscreen
+	OS.window_size = config.display.resolution.value
+	OS.window_fullscreen = config.display.is_fullscreen.value
 
 
 
