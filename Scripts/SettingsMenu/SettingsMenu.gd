@@ -20,7 +20,6 @@ func generate_settings_menu():
 		settings_container.add_child(tab)
 		for key_name in Settings.config[section_name].keys():
 			var current_key = Settings.config[section_name][key_name]
-			#print(key_name + " - " + str(typeof(current_key.value)) + str(current_key.value))
 			if current_key.display_name == "":
 				# hide settings with no display_name from the user
 				continue
