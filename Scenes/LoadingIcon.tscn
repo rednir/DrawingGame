@@ -75,5 +75,5 @@ __meta__ = {
 
 [node name="LoadingIcon" type="Sprite" parent="Panel"]
 position = Vector2( 23, 23 )
-rotation = 4.17963
+rotation = 1.38364
 texture = ExtResource( 1 )

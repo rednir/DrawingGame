@@ -1,7 +1,7 @@
 extends Node
 
 
-const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
+const SETTINGS_SCENE = preload("res://Scenes/SettingsMenu.tscn")
 
 signal new_turn
 signal new_data(updated_data)
@@ -34,13 +34,14 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.get_action_strength("open_settings") == 1 and settings_instance == null:
+	if Input.get_action_strength("open_settings") == 1 and Engine.get_main_loop().current_scene.get_node_or_null("SettingsMenuInstance") == null:
 		open_settings()
 
 
 
 func open_settings():
-	settings_instance = SettingsScene.instance()
+	settings_instance = SETTINGS_SCENE.instance()
+	settings_instance.name = "SettingsMenuInstance"
 	Engine.get_main_loop().current_scene.add_child(settings_instance)
 
 	

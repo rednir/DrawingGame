@@ -1,15 +1,15 @@
 extends Control
 
 
-const SettingsScene = preload("res://Scenes/SettingsMenu.tscn")
-const LoadingIconScene = preload("res://Scenes/LoadingIcon.tscn")
+const SETTINGS_SCENE = preload("res://Scenes/SettingsMenu.tscn")
+const LOADING_ICON_SCENE = preload("res://Scenes/LoadingIcon.tscn")
 
 
 onready var text_game_info = $TopBarContainer/TextGameInfo
 onready var textbox_join = $MainButtonsContainer/JoinContainer/TextboxJoin
 onready var textbox_username = $MainButtonsContainer/TextboxUsername
 onready var main_buttons_animation_player = $MainButtonsContainer/MainButtonsAnimation
-onready var loading_icon_instance = LoadingIconScene.instance()
+onready var loading_icon_instance = LOADING_ICON_SCENE.instance()
 
 
 var settings_instance
