@@ -84,7 +84,7 @@ func update_players_list():
 			vote_button.rect_size = Vector2(80, 50)
 			vote_button.add_color_override("font_color", player.color)
 			vote_button.margin_left = 10.0
-			vote_button.text = player.name + (" (%s votes)" % player.amount_of_votes)
+			vote_button.text = player.name + " (%s votes)" % player.amount_of_votes
 			if Client.this_player.has_voted:
 				vote_button.disabled = true
 

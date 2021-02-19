@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Themes/generic_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Resources/github.svg" type="Texture" id=2]
+[ext_resource path="res://Resources/Images/github.svg" type="Texture" id=2]
 [ext_resource path="res://Scripts/MainMenu/MainMenu.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/ClearSans-Regular.ttf" type="DynamicFontData" id=6]
 
@@ -99,22 +99,22 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=8]
 content_margin_bottom = 10.0
 draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=11]
 
-[sub_resource type="StyleBoxEmpty" id=12]
-
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=12]
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=13]
 font_data = ExtResource( 6 )
 
 [node name="MainMenuControl" type="Control"]
@@ -254,11 +254,11 @@ hint_tooltip = "Open Github"
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 icon = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -271,7 +271,7 @@ margin_right = 989.0
 margin_bottom = 31.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 text = "Settings"
 underline = 1
 __meta__ = {
@@ -292,7 +292,7 @@ __meta__ = {
 margin_right = 947.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 13 )
 text = "Drawing Game v0.0"
 fit_content_height = true
 __meta__ = {

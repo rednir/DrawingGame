@@ -12,8 +12,8 @@ const CONFIG_PATH = "user://config.ini"
 var config_file = ConfigFile.new()
 var config = {
 	display = {
-		width = 1024,
-		height = 600,
+		resolution = Vector2(1024, 600),
+		possible_resolutions = [Vector2(1024, 600), Vector2(1228, 720), Vector2(1536, 900), Vector2(1843, 1080)],
 		is_fullscreen = false
 	},
 	audio = {
@@ -24,8 +24,6 @@ var config = {
 		drawing_fps = 50
 	}
 }
-
-
 
 
 func _ready():
@@ -89,7 +87,7 @@ func create_config_file():
 
 
 func update_game_values_with_config():
-	OS.window_size = Vector2(config.display.width, config.display.height)
+	OS.window_size = config.display.resolution
 	OS.window_fullscreen = config.display.is_fullscreen
 
 

@@ -3,3 +3,4 @@ Release/
 *.import
 .mono/
 *.keystore
+mono_crash*
