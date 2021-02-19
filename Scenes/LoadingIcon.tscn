@@ -4,7 +4,6 @@
 [ext_resource path="res://Themes/generic_theme.tres" type="Theme" id=2]
 [ext_resource path="res://Styles/Panel/icon_panel.tres" type="StyleBox" id=3]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "out"
 length = 0.3
