@@ -177,6 +177,7 @@ func reset_config():
 	config = DEFAULT_CONFIG.duplicate(true)
 	save_config()
 	update_game_values_with_config()
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 	
 
 
