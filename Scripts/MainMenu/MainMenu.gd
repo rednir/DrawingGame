@@ -34,7 +34,11 @@ func _ready():
 		on_ip_got(null, null, null, null)
 
 	text_game_info.bbcode_text = "%s %s" % [Settings.GAME_NAME, Settings.GAME_VERSION]
-	textbox_username.text = Settings.config.game.last_name.value
+	
+	if Settings.config.game.default_name.value == "":
+		textbox_username.text = Settings.config.game.last_name.value
+	else:
+		textbox_username.text = Settings.config.game.default_name.value
 
 
 

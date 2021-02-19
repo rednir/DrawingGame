@@ -29,6 +29,7 @@ func generate_settings_menu():
 			var label = Label.new()
 			var item
 			
+			# TODO: fix repeated code
 			# decide what node to use based on the type index
 			match current_key.type:
 				"CheckBox":

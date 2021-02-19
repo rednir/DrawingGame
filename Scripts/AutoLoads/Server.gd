@@ -46,13 +46,7 @@ var player_colors = [
 	Color("c44569")			# rose
 ]
 
-var list_of_players = [
-	#{
-	#	client_id = null,
-	#	name = "other",
-	#	color = Color.green
-	#},
-]
+var list_of_players = []
 
 var round_data = DEFAULT_ROUND_DATA.duplicate(true)
 

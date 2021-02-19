@@ -68,6 +68,12 @@ const DEFAULT_CONFIG = {
 			type = null,
 			value = ""
 		},
+		default_name = {
+			display_name = "Default Name",
+			description = "Your name will be defaulted to this value.\nLeave blank to default to your last used name instead.",
+			type = "LineEdit",
+			value = ""
+		},
 		drawing_fps = {
 			display_name = "Drawing Framerate",
 			description = "Controls the number of times per second a line is drawn.\nTry adjust this if your drawings look polygonal.",

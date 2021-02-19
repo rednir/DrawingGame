@@ -63,7 +63,7 @@ func on_closed(was_clean = false):
 	Server.round_data = Server.DEFAULT_ROUND_DATA.duplicate(true)
 	Server.server = null
 
-	if was_clean and Engine.get_main_loop().current_scene.get_name() != "MainMenuControl":		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now. maybe docs are wrong?
+	if was_clean and Engine.get_main_loop().current_scene.get_name() != "MainMenuControl":		# i dont understand why, but when i close cleanly, was_clean is false. how does that make any sense. but this works for now.
 		Events.emit_signal("error", "The connection to the server was lost unexpectedly.")
 		yield(Engine.get_main_loop().current_scene.get_node("AcceptDialog"), "hide")
 
